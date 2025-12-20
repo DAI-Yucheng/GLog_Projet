@@ -1,262 +1,208 @@
+drop database foncieres;
 create database foncieres;
 use foncieres;
--- drop database foncieres;
 
-DROP TABLE IF EXISTS 
+-- ============================================
+-- ÉTAPE 1 : CRÉATION TABLE D'IMPORT
+-- ============================================
 
--- *******************************************
--- ÉTAPE 1 : CRÉATION DES TABLES INDÉPENDANTES
--- *******************************************
+DROP TABLE IF EXISTS DVF_IMPORT;
 
--- Table 1 : ADRESSE (Nouvelle table unique pour la localisation)
-CREATE TABLE ADRESSE (
-    ID_Adresse        INT PRIMARY KEY AUTO_INCREMENT, -- Clé primaire auto-incrémentée
-    Code_postal       VARCHAR(5) NOT NULL,
-    Commune           VARCHAR(100) NOT NULL,
-    Code_departement  VARCHAR(3),
-    Code_commune      VARCHAR(5),
-    No_voie           VARCHAR(10),
-    B_T_Q             VARCHAR(10),
-    Type_de_voie      VARCHAR(50),
-    Voie              VARCHAR(150),
-    
-    -- Clé UNIQUE pour garantir que chaque adresse complète n'est insérée qu'une seule fois
-    UNIQUE KEY idx_unique_adresse (No_voie, B_T_Q, Type_de_voie, Voie, Code_postal) 
+CREATE TABLE DVF_IMPORT (
+    identifiant_document VARCHAR(50),
+    reference_document VARCHAR(50),
+    article_cgi_1 VARCHAR(50),
+    article_cgi_2 VARCHAR(50),
+    article_cgi_3 VARCHAR(50),
+    article_cgi_4 VARCHAR(50),
+    article_cgi_5 VARCHAR(50),
+    no_disposition VARCHAR(10),
+    date_mutation VARCHAR(10),
+    nature_mutation VARCHAR(50),
+    valeur_fonciere VARCHAR(20),
+    no_voie VARCHAR(10),
+    btq VARCHAR(5),
+    type_de_voie VARCHAR(10),
+    code_voie VARCHAR(10),
+    voie VARCHAR(100),
+    code_postal VARCHAR(10),
+    commune VARCHAR(100),
+    code_departement VARCHAR(3),
+    code_commune VARCHAR(10),
+    prefixe_section VARCHAR(10),
+    section VARCHAR(10),
+    no_plan VARCHAR(10),
+    no_volume VARCHAR(10),
+    lot_1 VARCHAR(10),
+    surface_carrez_1 VARCHAR(20),
+    lot_2 VARCHAR(10),
+    surface_carrez_2 VARCHAR(20),
+    lot_3 VARCHAR(10),
+    surface_carrez_3 VARCHAR(20),
+    lot_4 VARCHAR(10),
+    surface_carrez_4 VARCHAR(20),
+    lot_5 VARCHAR(10),
+    surface_carrez_5 VARCHAR(20),
+    nombre_lots VARCHAR(10),
+    code_type_local VARCHAR(10),
+    type_local VARCHAR(50),
+    identifiant_local VARCHAR(50),
+    surface_reelle_bati VARCHAR(20),
+    nombre_pieces_principales VARCHAR(10),
+    nature_culture VARCHAR(5),
+    nature_culture_speciale VARCHAR(50),
+    surface_terrain VARCHAR(20)
 );
 
--- Table 2 : LOCAL (Détails de l'unité bâtie)
-CREATE TABLE LOCAL (
-    Identifiant_local         INT PRIMARY KEY AUTO_INCREMENT,
-    Code_type_local           VARCHAR(5),
-    Type_local                VARCHAR(50),
-    Surface_reelle_bati       VARCHAR(5),
-    Nombre_pieces_principales VARCHAR(5)
-);
-
--- Table 3 : TERRAIN (Détails du terrain/parcelle)
-CREATE TABLE TERRAIN (
-    Identifiant_terrain     INT PRIMARY KEY AUTO_INCREMENT, -- PK et FK vers LOCAL
-    ID_Adresse 				INT,
-    Prefixe_de_section      VARCHAR(3),
-    Section                 VARCHAR(5),
-    No_plan                 VARCHAR(5),
-    No_Volume               VARCHAR(5),
-    Nature_culture          VARCHAR(50),
-    Nature_culture_speciale VARCHAR(50),
-    Surface_terrain         VARCHAR(10),
-    
-    FOREIGN KEY (Id_adresse) REFERENCES ADRESSE(ID_Adresse)
-        ON UPDATE CASCADE ON DELETE RESTRICT
-        
-);
-
-
--- *******************************************
--- ÉTAPE 2 : CRÉATION DE LA TABLE CENTRALE ET DE LIAISON
--- *******************************************
-
--- Table 4 : MUTATION (Transaction immobilière)
-CREATE TABLE MUTATION (
-    No_disposition    INT PRIMARY KEY,
-    Date_mutation     DATE,
-    Nature_mutation   VARCHAR(50),
-    Valeur_fonciere   DECIMAL(15, 2),
-    Nombre_de_lots    INT,
-    
-    Id_adresse       INT,
-    FOREIGN KEY (Id_adresse) REFERENCES ADRESSE(ID_Adresse)
-        ON UPDATE CASCADE ON DELETE RESTRICT,
-        
-    Identifiant_local VARCHAR(50),
-    FOREIGN KEY (Identifiant_local) REFERENCES LOCAL(Identifiant_local)
-        ON UPDATE CASCADE ON DELETE RESTRICT
-);
-
--- Table 5 : LOTS (Détail de chaque lot vendu dans une transaction)
-CREATE TABLE LOTS (
-    No_disposition     INT NOT NULL,          -- FK vers MUTATION
-    No_Lot_Index       TINYINT NOT NULL,      -- 1, 2, 3...
-    No_lot_original    VARCHAR(50),           -- L'identifiant textuel du lot
-    Surface_Carrez     DECIMAL(10, 2),
-    
-    PRIMARY KEY (No_disposition, No_Lot_Index), 
-    
-    FOREIGN KEY (No_disposition) REFERENCES MUTATION(No_disposition)
-        ON UPDATE CASCADE ON DELETE CASCADE
-);
-
--- Créer la table temporaire RawData (avec les noms de colonnes originaux du CSV)
-CREATE TABLE RawData (
-    No_disposition VARCHAR(50),
-    Date_mutation VARCHAR(50),
-    Nature_mutation VARCHAR(50),
-    Valeur_fonciere VARCHAR(50),
-    No_voie VARCHAR(50),
-    B_T_Q VARCHAR(50),
-    Type_de_voie VARCHAR(50),
-    Code_voie VARCHAR(50),
-    Voie VARCHAR(255),
-    Code_postal VARCHAR(50),
-    Commune VARCHAR(150),
-    Code_departement VARCHAR(50),
-    
-    Code_commune VARCHAR(50),
-    Prefixe_de_section VARCHAR(50),
-    Section VARCHAR(50),
-    No_plan VARCHAR(50),
-    No_Volume VARCHAR(50),
-    
-    lot1 VARCHAR(50), 
-    surface_carrez_lot1 VARCHAR(50),
-    lot2 VARCHAR(50),
-    surface_carrez_lot2 VARCHAR(50),
-	lot3 VARCHAR(50), 
-    surface_carrez_lot3 VARCHAR(50),
-    lot4 VARCHAR(50),
-    surface_carrez_lot4 VARCHAR(50),
-    lot5 VARCHAR(50),
-    surface_carrez_lot5 VARCHAR(50),
-    
-    Nombre_de_lots VARCHAR(50),
-    Code_type_local VARCHAR(50),
-    Type_local VARCHAR(50),
-    Identifiant_local VARCHAR(50),
-    Surface_reelle_bati VARCHAR(50),
-    Nombre_pieces_principales VARCHAR(50),
-    Nature_culture VARCHAR(50),
-    Nature_culture_speciale VARCHAR(50),
-    Surface_terrain VARCHAR(50)
-);
-
--- 1. Peuplement de la table ADRESSE
--- Insertion IGNORE pour éviter les erreurs de doublon sur la clé unique composite.
-INSERT IGNORE INTO ADRESSE (Code_postal, Commune, Code_departement, Code_commune, No_voie, B_T_Q, Type_de_voie, Voie)
-SELECT 
-    TRIM(Code_postal),
-    TRIM(Commune),
-    TRIM(Code_departement),
-    TRIM(Code_commune),
-    TRIM(No_voie),
-    TRIM(B_T_Q),
-    TRIM(Type_de_voie),
-    TRIM(Voie)
-FROM
-    RawData
-WHERE Code_postal IS NOT NULL AND TRIM(Code_postal) <> '';
-select * from adresse;
-
--- 2. Peuplement de la table LOCAL
--- Insère les Identifiants locaux uniques
-INSERT INTO LOCAL (Code_type_local, Type_local, Surface_reelle_bati, Nombre_pieces_principales)
-SELECT DISTINCT
---    TRIM(Identifiant_local),
-    TRIM(Code_type_local),
-    TRIM(Type_local),
-    TRIM(Surface_reelle_bati), 
-    TRIM(Nombre_pieces_principales)
-FROM
-    RawData
-ON DUPLICATE KEY UPDATE
-    local.Identifiant_local = rawdata.Identifiant_local;
-select * from local;
-
--- 3. Peuplement de la table TERRAIN
-INSERT INTO TERRAIN (Prefixe_de_section, Section, No_plan, No_Volume, Nature_culture, Nature_culture_speciale, Surface_terrain,adresse)
-SELECT DISTINCT
-    TRIM(Prefixe_de_section),
-	TRIM(Section),
-    TRIM(No_plan),
-    TRIM(No_Volume),
-    TRIM(Nature_culture),
-    TRIM(Nature_culture_speciale),
-    TRIM(Surface_terrain)
-FROM
-    RawData;
-select * from terrain;
--- 4. Peuplement de la table MUTATION
-INSERT INTO MUTATION (No_disposition, Date_mutation, Nature_mutation, Valeur_fonciere, Nombre_de_lots, ID_Adresse, Identifiant_local)
-SELECT DISTINCT
-    TRIM(RD.No_disposition),
-    STR_TO_DATE(TRIM(RD.Date_mutation), '%d/%m/%Y'), -- Conversion de la date
-    NULLIF(TRIM(RD.Nature_mutation), ''),
-    NULLIF(TRIM(RD.Valeur_fonciere), ''),
-    NULLIF(TRIM(RD.Nombre_de_lots), ''),
-    A.ID_Adresse, -- CLÉ RÉCUPÉRÉE PAR LA JOINTURE
-    NULLIF(TRIM(RD.Identifiant_local), '')
-FROM
-    RawData AS RD
--- Jointure sur toutes les colonnes d'adresse pour récupérer l'ID_Adresse
-JOIN 
-    ADRESSE AS A ON 
-        TRIM(RD.Code_postal) = A.Code_postal AND
-        TRIM(RD.Voie) = A.Voie AND 
-        NULLIF(TRIM(RD.No_voie), '') = A.No_voie AND
-        NULLIF(TRIM(RD.B_T_Q), '') = A.B_T_Q
-WHERE RD.No_disposition IS NOT NULL AND TRIM(RD.No_disposition) <> ''
-ON DUPLICATE KEY UPDATE
-    No_disposition = No_disposition;
-    
--- 5. Peuplement de la table LOTS (Pivotage)
-INSERT INTO LOTS (No_disposition, No_Lot_Index, No_lot_original, Surface_Carrez)
-
--- Lot 1
-SELECT 
-    TRIM(No_disposition) AS No_disposition, 
-    1 AS No_Lot_Index, 
-    NULLIF(TRIM(lot1), '') AS No_lot_original, 
-    NULLIF(TRIM(surface_carrez_lot1), '') AS Surface_Carrez 
-FROM RawData 
-WHERE lot1 IS NOT NULL AND TRIM(lot1) <> '' 
-
-UNION ALL
-
--- Lot 2
-SELECT 
-    TRIM(No_disposition), 
-    2, 
-    NULLIF(TRIM(lot2), ''), 
-    NULLIF(TRIM(surface_carrez_lot2), '')
-FROM RawData 
-WHERE lot2 IS NOT NULL AND TRIM(lot2) <> ''
-
-UNION ALL
-
--- Lot 3
-SELECT 
-    TRIM(No_disposition), 
-    3, 
-    NULLIF(TRIM(lot3), ''), 
-    NULLIF(TRIM(surface_carrez_lot3), '')
-FROM RawData 
-WHERE lot3 IS NOT NULL AND TRIM(lot3) <> ''
-
-UNION ALL
-
--- Lot 4
-SELECT 
-    TRIM(No_disposition), 
-    4, 
-    NULLIF(TRIM(lot4), ''), 
-    NULLIF(TRIM(surface_carrez_lot4), '')
-FROM RawData 
-WHERE lot4 IS NOT NULL AND TRIM(lot4) <> ''
-
-UNION ALL
-
--- Lot 5
-SELECT 
-    TRIM(No_disposition), 
-    5, 
-    NULLIF(TRIM(lot5), ''), 
-    NULLIF(TRIM(surface_carrez_lot5), '')
-FROM RawData 
-WHERE lot5 IS NOT NULL AND TRIM(lot5) <> '';
+-- ============================================
+-- ÉTAPE 2 : IMPORT DU FICHIER TXT
+-- ============================================
 
 SET GLOBAL local_infile = 1;  -- Permettre l'importation de données
 SHOW GLOBAL VARIABLES LIKE 'secure_file_priv'; -- emplacement des données à importer
 
--- LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/ValeursFoncieres-2025-S1.csv'
--- INTO TABLE RawData
--- FIELDS TERMINATED BY '|' -- Le séparateur de colonne (virgule, point-virgule, etc.)
--- LINES TERMINATED BY '\n' -- Le séparateur de ligne
--- IGNORE 1 LINES;
+LOAD DATA LOCAL INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/data_dvf.txt'
+INTO TABLE DVF_IMPORT
+FIELDS TERMINATED BY '|'
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES;
+
+-- ============================================
+-- ÉTAPE 3 : CRÉATION DES TABLES NORMALISÉES
+-- ============================================
+
+DROP TABLE IF EXISTS DEPARTEMENT;
+CREATE TABLE DEPARTEMENT (
+    code_departement VARCHAR(3) PRIMARY KEY
+);
+
+DROP TABLE IF EXISTS COMMUNE;
+CREATE TABLE COMMUNE (
+    id_commune INT PRIMARY KEY AUTO_INCREMENT,
+    code_departement VARCHAR(3),
+    commune VARCHAR(100),
+    code_postal VARCHAR(10)
+);
+
+DROP TABLE IF EXISTS NATURE_MUTATION;
+CREATE TABLE NATURE_MUTATION (
+    id_nature_mutation INT PRIMARY KEY AUTO_INCREMENT,
+    nature_mutation VARCHAR(50)
+);
+
+DROP TABLE IF EXISTS TYPE_LOCAL;
+CREATE TABLE TYPE_LOCAL (
+    id_type_local INT PRIMARY KEY AUTO_INCREMENT,
+    type_local VARCHAR(50)
+);
+
+DROP TABLE IF EXISTS NATURE_CULTURE;
+CREATE TABLE NATURE_CULTURE (
+    code_nature_culture VARCHAR(5) PRIMARY KEY
+);
+
+DROP TABLE IF EXISTS MUTATION;
+CREATE TABLE MUTATION (
+    id_mutation INT PRIMARY KEY AUTO_INCREMENT,
+    no_disposition VARCHAR(10),
+    date_mutation DATE,
+    nature_mutation VARCHAR(50),
+    valeur_fonciere DECIMAL(12,2)
+);
+
+DROP TABLE IF EXISTS BIEN;
+CREATE TABLE BIEN (
+    id_bien INT PRIMARY KEY AUTO_INCREMENT,
+    no_disposition VARCHAR(10),
+    date_mutation DATE,
+    valeur_fonciere DECIMAL(12,2),
+    commune VARCHAR(100),
+    code_departement VARCHAR(3),
+    code_postal VARCHAR(10),
+    type_local VARCHAR(50),
+    surface_reelle_bati VARCHAR(10),
+    nombre_pieces_principales VARCHAR(10),
+    nature_culture VARCHAR(5),
+    surface_terrain VARCHAR(10)
+);
+
+-- ============================================
+-- ÉTAPE 4 : RÉPARTITION DES DONNÉES
+-- ============================================
+
+-- Remplir DEPARTEMENT
+INSERT INTO DEPARTEMENT (code_departement)
+SELECT DISTINCT code_departement
+FROM DVF_IMPORT
+WHERE code_departement IS NOT NULL;
+
+-- Remplir COMMUNE
+INSERT INTO COMMUNE (code_departement, commune, code_postal)
+SELECT DISTINCT code_departement, commune, code_postal
+FROM DVF_IMPORT
+WHERE commune IS NOT NULL;
+
+-- Remplir NATURE_MUTATION
+INSERT INTO NATURE_MUTATION (nature_mutation)
+SELECT DISTINCT nature_mutation
+FROM DVF_IMPORT
+WHERE nature_mutation IS NOT NULL;
+
+-- Remplir TYPE_LOCAL
+INSERT INTO TYPE_LOCAL (type_local)
+SELECT DISTINCT type_local
+FROM DVF_IMPORT
+WHERE type_local IS NOT NULL;
+
+-- Remplir NATURE_CULTURE
+INSERT INTO NATURE_CULTURE (code_nature_culture)
+SELECT DISTINCT nature_culture
+FROM DVF_IMPORT
+WHERE nature_culture IS NOT NULL;
+
+-- Remplir MUTATION
+INSERT INTO MUTATION (no_disposition, date_mutation, nature_mutation, valeur_fonciere)
+SELECT DISTINCT 
+    no_disposition,
+    STR_TO_DATE(date_mutation, '%d/%m/%Y'),
+    nature_mutation,
+    CAST(REPLACE(valeur_fonciere, ',', '.') AS DECIMAL(12,2))
+FROM DVF_IMPORT;
+
+-- Remplir BIEN
+INSERT INTO BIEN (no_disposition, date_mutation, valeur_fonciere, commune, code_departement, 
+                  code_postal, type_local, surface_reelle_bati, nombre_pieces_principales, 
+                  nature_culture, surface_terrain)
+SELECT 
+    no_disposition,
+    STR_TO_DATE(date_mutation, '%d/%m/%Y'),
+    CAST(REPLACE(valeur_fonciere, ',', '.') AS DECIMAL(12,2)),
+    commune,
+    code_departement,
+    code_postal,
+    type_local,
+    surface_reelle_bati,
+    nombre_pieces_principales,
+    nature_culture,
+    surface_terrain
+FROM DVF_IMPORT;
+
+-- ============================================
+-- VÉRIFICATION
+-- ============================================
+
+SELECT 'DVF_IMPORT' as Table_name, COUNT(*) as Nb_lignes FROM DVF_IMPORT
+UNION ALL
+SELECT 'DEPARTEMENT', COUNT(*) FROM DEPARTEMENT
+UNION ALL
+SELECT 'COMMUNE', COUNT(*) FROM COMMUNE
+UNION ALL
+SELECT 'NATURE_MUTATION', COUNT(*) FROM NATURE_MUTATION
+UNION ALL
+SELECT 'TYPE_LOCAL', COUNT(*) FROM TYPE_LOCAL
+UNION ALL
+SELECT 'NATURE_CULTURE', COUNT(*) FROM NATURE_CULTURE
+UNION ALL
+SELECT 'MUTATION', COUNT(*) FROM MUTATION
+UNION ALL
+SELECT 'BIEN', COUNT(*) FROM BIEN;
