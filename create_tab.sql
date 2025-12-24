@@ -1,4 +1,4 @@
-drop database foncieres;
+drop database if exists foncieres;
 create database foncieres;
 use foncieres;
 
@@ -61,7 +61,7 @@ CREATE TABLE DVF_IMPORT (
 SET GLOBAL local_infile = 1;  -- Permettre l'importation de données
 SHOW GLOBAL VARIABLES LIKE 'secure_file_priv'; -- emplacement des données à importer
 
-LOAD DATA LOCAL INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/data_dvf.txt'
+LOAD DATA LOCAL INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/ValeursFoncieres-2025-S1_part.txt'
 INTO TABLE DVF_IMPORT
 FIELDS TERMINATED BY '|'
 LINES TERMINATED BY '\n'
@@ -81,7 +81,8 @@ CREATE TABLE COMMUNE (
     id_commune INT PRIMARY KEY AUTO_INCREMENT,
     code_departement VARCHAR(3),
     commune VARCHAR(100),
-    code_postal VARCHAR(10)
+    code_postal VARCHAR(10),
+    UNIQUE (code_departement, commune, code_postal)
 );
 
 DROP TABLE IF EXISTS NATURE_MUTATION;
@@ -121,7 +122,7 @@ CREATE TABLE BIEN (
     code_postal VARCHAR(10),
     type_local VARCHAR(50),
     surface_reelle_bati VARCHAR(10),
-    nombre_pieces_principales VARCHAR(10),
+    nombre_pieces_principales DECIMAL(5,0),
     nature_culture VARCHAR(5),
     surface_terrain VARCHAR(10)
 );
@@ -160,13 +161,18 @@ SELECT DISTINCT nature_culture
 FROM DVF_IMPORT
 WHERE nature_culture IS NOT NULL;
 
+
 -- Remplir MUTATION
 INSERT INTO MUTATION (no_disposition, date_mutation, nature_mutation, valeur_fonciere)
 SELECT DISTINCT 
     no_disposition,
     STR_TO_DATE(date_mutation, '%d/%m/%Y'),
     nature_mutation,
-    CAST(REPLACE(valeur_fonciere, ',', '.') AS DECIMAL(12,2))
+	CASE
+        WHEN valeur_fonciere REGEXP '^[0-9]+(,[0-9]+)?$'
+        THEN CAST(REPLACE(valeur_fonciere, ',', '.') AS DECIMAL(12,2))
+        ELSE NULL
+    END
 FROM DVF_IMPORT;
 
 -- Remplir BIEN
@@ -176,15 +182,47 @@ INSERT INTO BIEN (no_disposition, date_mutation, valeur_fonciere, commune, code_
 SELECT 
     no_disposition,
     STR_TO_DATE(date_mutation, '%d/%m/%Y'),
-    CAST(REPLACE(valeur_fonciere, ',', '.') AS DECIMAL(12,2)),
+	CASE
+        WHEN valeur_fonciere REGEXP '^[0-9]+(,[0-9]+)?$'
+        THEN CAST(REPLACE(valeur_fonciere, ',', '.') AS DECIMAL(12,2))
+        ELSE NULL
+    END AS valeur_fonciere,
     commune,
     code_departement,
     code_postal,
     type_local,
     surface_reelle_bati,
-    nombre_pieces_principales,
+	CASE
+		WHEN nombre_pieces_principales REGEXP '^[0-99999]+(,[0-99999]+)?$'
+		THEN CAST(REPLACE(nombre_pieces_principales, ',', '.') AS DECIMAL(5,0))
+		ELSE NULL
+    END AS nombre_pieces_principales,
     nature_culture,
     surface_terrain
 FROM DVF_IMPORT;
 
--- 
+
+-- ============================================
+-- ÉTAPE 5 : AJOUT DES CLÉS ÉTRANGÈRES
+-- ============================================
+
+-- COMMUNE → DEPARTEMENT
+ALTER TABLE COMMUNE
+ADD CONSTRAINT fk_commune_departement 
+FOREIGN KEY (code_departement) REFERENCES DEPARTEMENT(code_departement)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+
+-- BIEN → DEPARTEMENT
+ALTER TABLE BIEN
+ADD CONSTRAINT fk_bien_departement 
+FOREIGN KEY (code_departement) REFERENCES DEPARTEMENT(code_departement)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+
+-- BIEN → NATURE_CULTURE
+ALTER TABLE BIEN
+ADD CONSTRAINT fk_bien_nature_culture 
+FOREIGN KEY (nature_culture) REFERENCES NATURE_CULTURE(code_nature_culture)
+ON DELETE SET NULL
+ON UPDATE CASCADE;

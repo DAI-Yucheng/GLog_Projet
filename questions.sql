@@ -14,7 +14,7 @@ SELECT
 FROM MUTATION
 GROUP BY DATE_FORMAT(date_mutation, '%Y-%m')
 ORDER BY mois;
-
+select distinct date_mutation from mutation;
 -- Q2 : Nombre de ventes par mois
 SELECT 
     DATE_FORMAT(date_mutation, '%Y-%m') as mois,
@@ -22,14 +22,6 @@ SELECT
 FROM MUTATION
 GROUP BY DATE_FORMAT(date_mutation, '%Y-%m')
 ORDER BY mois;
-
--- Q3 : Mois avec le plus de transactions
-SELECT 
-    MONTH(date_mutation) as mois,
-    COUNT(*) as nb_ventes
-FROM MUTATION
-GROUP BY MONTH(date_mutation)
-ORDER BY nb_ventes DESC;
 
 -- ============================================
 -- ANALYSES GÉOGRAPHIQUES
@@ -188,15 +180,6 @@ WHERE nature_culture IS NOT NULL
 GROUP BY nature_culture
 ORDER BY nb_biens DESC;
 
--- Q17 : Prix médian et prix moyen par commune
-SELECT 
-    commune,
-    AVG(valeur_fonciere) as prix_moyen,
-    COUNT(*) as nb_ventes
-FROM BIEN
-GROUP BY commune
-HAVING COUNT(*) >= 2
-ORDER BY prix_moyen DESC;
 
 -- Q18 : Proportion de biens avec/sans lots
 SELECT 
