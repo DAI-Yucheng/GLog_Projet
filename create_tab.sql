@@ -1,12 +1,10 @@
-drop database if exists foncieres;
-create database foncieres;
-use foncieres;
+DROP DATABASE IF EXISTS foncieres;
+CREATE DATABASE foncieres;
+USE foncieres;
 
 -- ============================================
--- ÉTAPE 1 : CRÉATION TABLE D'IMPORT
+-- ÉTAPE 1 : CRÉATION TABLE D'IMPORT (BRUTE)
 -- ============================================
-
-DROP TABLE IF EXISTS DVF_IMPORT;
 
 CREATE TABLE DVF_IMPORT (
     identifiant_document VARCHAR(50),
@@ -55,11 +53,10 @@ CREATE TABLE DVF_IMPORT (
 );
 
 -- ============================================
--- ÉTAPE 2 : IMPORT DU FICHIER TXT
+-- ÉTAPE 2 : IMPORT DU FICHIER
 -- ============================================
 
-SET GLOBAL local_infile = 1;  -- Permettre l'importation de données
-SHOW GLOBAL VARIABLES LIKE 'secure_file_priv'; -- emplacement des données à importer
+SET GLOBAL local_infile = 1;
 
 LOAD DATA LOCAL INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/ValeursFoncieres-2025-S1_part.txt'
 INTO TABLE DVF_IMPORT
@@ -67,16 +64,26 @@ FIELDS TERMINATED BY '|'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES;
 
+-- Conversion de la date de str en DATE
+ALTER TABLE DVF_IMPORT ADD COLUMN date_mutation_clean DATE;
+SET SQL_SAFE_UPDATES = 0;
+
+UPDATE DVF_IMPORT 
+SET date_mutation_clean = STR_TO_DATE(date_mutation, '%d/%m/%Y');
+
+ALTER TABLE DVF_IMPORT DROP COLUMN date_mutation;
+
+ALTER TABLE DVF_IMPORT 
+CHANGE COLUMN date_mutation_clean date_mutation DATE;
+SET SQL_SAFE_UPDATES = 1;
 -- ============================================
 -- ÉTAPE 3 : CRÉATION DES TABLES NORMALISÉES
 -- ============================================
 
-DROP TABLE IF EXISTS DEPARTEMENT;
 CREATE TABLE DEPARTEMENT (
     code_departement VARCHAR(3) PRIMARY KEY
 );
 
-DROP TABLE IF EXISTS COMMUNE;
 CREATE TABLE COMMUNE (
     id_commune INT PRIMARY KEY AUTO_INCREMENT,
     code_departement VARCHAR(3),
@@ -85,144 +92,119 @@ CREATE TABLE COMMUNE (
     UNIQUE (code_departement, commune, code_postal)
 );
 
-DROP TABLE IF EXISTS NATURE_MUTATION;
 CREATE TABLE NATURE_MUTATION (
     id_nature_mutation INT PRIMARY KEY AUTO_INCREMENT,
     nature_mutation VARCHAR(50)
 );
 
-DROP TABLE IF EXISTS TYPE_LOCAL;
 CREATE TABLE TYPE_LOCAL (
     id_type_local INT PRIMARY KEY AUTO_INCREMENT,
     type_local VARCHAR(50)
 );
 
-DROP TABLE IF EXISTS NATURE_CULTURE;
 CREATE TABLE NATURE_CULTURE (
     code_nature_culture VARCHAR(5) PRIMARY KEY
 );
 
-DROP TABLE IF EXISTS MUTATION;
+
 CREATE TABLE MUTATION (
     id_mutation INT PRIMARY KEY AUTO_INCREMENT,
     no_disposition VARCHAR(10),
     date_mutation DATE,
-    nature_mutation VARCHAR(50),
-    valeur_fonciere DECIMAL(12,2)
+    id_nature_mutation INT,
+    valeur_fonciere DECIMAL(15,2)
 );
 
-DROP TABLE IF EXISTS BIEN;
 CREATE TABLE BIEN (
     id_bien INT PRIMARY KEY AUTO_INCREMENT,
-    no_disposition VARCHAR(10),
-    date_mutation DATE,
-    valeur_fonciere DECIMAL(12,2),
-    commune VARCHAR(100),
-    code_departement VARCHAR(3),
-    code_postal VARCHAR(10),
-    type_local VARCHAR(50),
-    surface_reelle_bati VARCHAR(10),
-    nombre_pieces_principales DECIMAL(5,0),
+    id_commune INT,
+    id_type_local INT,
+    surface_reelle_bati DECIMAL(10,2),
+    nombre_pieces_principales INT,
     nature_culture VARCHAR(5),
-    surface_terrain VARCHAR(10)
+    surface_terrain DECIMAL(10,2),
+    -- On garde l'id_local temporairement pour faire la liaison avec Mutation
+    _tmp_row_id int
+);
+
+drop table if exists mutation_bien;
+CREATE TABLE MUTATION_BIEN (
+    id_mutation INT,
+    id_bien INT,
+    PRIMARY KEY (id_mutation, id_bien)
 );
 
 -- ============================================
 -- ÉTAPE 4 : RÉPARTITION DES DONNÉES
 -- ============================================
 
--- Remplir DEPARTEMENT
 INSERT INTO DEPARTEMENT (code_departement)
-SELECT DISTINCT code_departement
-FROM DVF_IMPORT
-WHERE code_departement IS NOT NULL;
+SELECT DISTINCT code_departement FROM DVF_IMPORT WHERE code_departement IS NOT NULL;
 
--- Remplir COMMUNE
 INSERT INTO COMMUNE (code_departement, commune, code_postal)
-SELECT DISTINCT code_departement, commune, code_postal
-FROM DVF_IMPORT
-WHERE commune IS NOT NULL;
+SELECT DISTINCT code_departement, commune, code_postal FROM DVF_IMPORT WHERE commune IS NOT NULL;
 
--- Remplir NATURE_MUTATION
 INSERT INTO NATURE_MUTATION (nature_mutation)
-SELECT DISTINCT nature_mutation
-FROM DVF_IMPORT
-WHERE nature_mutation IS NOT NULL;
+SELECT DISTINCT nature_mutation FROM DVF_IMPORT WHERE nature_mutation IS NOT NULL;
 
--- Remplir TYPE_LOCAL
 INSERT INTO TYPE_LOCAL (type_local)
-SELECT DISTINCT type_local
-FROM DVF_IMPORT
-WHERE type_local IS NOT NULL;
+SELECT DISTINCT type_local FROM DVF_IMPORT WHERE type_local IS NOT NULL;
 
--- Remplir NATURE_CULTURE
 INSERT INTO NATURE_CULTURE (code_nature_culture)
-SELECT DISTINCT nature_culture
-FROM DVF_IMPORT
-WHERE nature_culture IS NOT NULL;
+SELECT DISTINCT nature_culture FROM DVF_IMPORT WHERE nature_culture IS NOT NULL;
 
-
--- Remplir MUTATION
-INSERT INTO MUTATION (no_disposition, date_mutation, nature_mutation, valeur_fonciere)
+INSERT INTO MUTATION (no_disposition, date_mutation, id_nature_mutation, valeur_fonciere)
 SELECT DISTINCT 
-    no_disposition,
-    STR_TO_DATE(date_mutation, '%d/%m/%Y'),
-    nature_mutation,
-	CASE
-        WHEN valeur_fonciere REGEXP '^[0-9]+(,[0-9]+)?$'
-        THEN CAST(REPLACE(valeur_fonciere, ',', '.') AS DECIMAL(12,2))
-        ELSE NULL
+    i.no_disposition, 
+    i.date_mutation,
+    nm.id_nature_mutation,
+    -- On nettoie la chaîne : on enlève les espaces et on remplace la virgule
+    -- Si le résultat est vide ou non numérique, on met NULL
+    CASE 
+        WHEN TRIM(REPLACE(i.valeur_fonciere, ',', '.')) REGEXP '^[0-9]+(\.[0-9]+)?$' 
+        THEN CAST(TRIM(REPLACE(i.valeur_fonciere, ',', '.')) AS DECIMAL(15,2))
+        ELSE NULL 
     END
-FROM DVF_IMPORT;
+FROM DVF_IMPORT i
+JOIN NATURE_MUTATION nm ON i.nature_mutation = nm.nature_mutation
+WHERE i.valeur_fonciere IS NOT NULL AND i.valeur_fonciere != '';
 
--- Remplir BIEN
-INSERT INTO BIEN (no_disposition, date_mutation, valeur_fonciere, commune, code_departement, 
-                  code_postal, type_local, surface_reelle_bati, nombre_pieces_principales, 
-                  nature_culture, surface_terrain)
+-- Bien : chaque ligne de l'import est un bien (bati ou terrain)
+
+-- ÉTAPE 1 : Ajouter une colonne d'index temporaire à DVF_IMPORT
+ALTER TABLE DVF_IMPORT ADD COLUMN _tmp_row_id INT AUTO_INCREMENT PRIMARY KEY FIRST;
+
+-- ÉTAPE 3 : Insertion des BIEN avec l'index de ligne
+INSERT INTO BIEN (id_commune, id_type_local, surface_reelle_bati, nombre_pieces_principales, nature_culture, surface_terrain, _tmp_row_id)
 SELECT 
-    no_disposition,
-    STR_TO_DATE(date_mutation, '%d/%m/%Y'),
-	CASE
-        WHEN valeur_fonciere REGEXP '^[0-9]+(,[0-9]+)?$'
-        THEN CAST(REPLACE(valeur_fonciere, ',', '.') AS DECIMAL(12,2))
-        ELSE NULL
-    END AS valeur_fonciere,
-    commune,
-    code_departement,
-    code_postal,
-    type_local,
-    surface_reelle_bati,
-	CASE
-		WHEN nombre_pieces_principales REGEXP '^[0-99999]+(,[0-99999]+)?$'
-		THEN CAST(REPLACE(nombre_pieces_principales, ',', '.') AS DECIMAL(5,0))
-		ELSE NULL
-    END AS nombre_pieces_principales,
-    nature_culture,
-    surface_terrain
-FROM DVF_IMPORT;
+    c.id_commune,
+    tl.id_type_local,
+    CAST(REPLACE(NULLIF(i.surface_reelle_bati, ''), ',', '.') AS DECIMAL(10,2)),
+    CAST(NULLIF(i.nombre_pieces_principales, '') AS UNSIGNED),
+    i.nature_culture,
+    CAST(REPLACE(NULLIF(i.surface_terrain, ''), ',', '.') AS DECIMAL(10,2)),
+    i._tmp_row_id  -- On capture l'index de la ligne d'import
+FROM DVF_IMPORT i
+LEFT JOIN COMMUNE c ON i.commune = c.commune AND i.code_postal = c.code_postal AND i.code_departement = c.code_departement
+LEFT JOIN TYPE_LOCAL tl ON i.type_local = tl.type_local;
 
+-- ÉTAPE 4 : Mutation_Bien avec liaison par _tmp_row_id
+
+INSERT INTO MUTATION_BIEN (id_mutation, id_bien)
+SELECT DISTINCT m.id_mutation, b.id_bien
+FROM DVF_IMPORT i
+JOIN MUTATION m ON i.no_disposition = m.no_disposition 
+    AND i.date_mutation = m.date_mutation
+JOIN BIEN b ON b._tmp_row_id = i._tmp_row_id;
 
 -- ============================================
--- ÉTAPE 5 : AJOUT DES CLÉS ÉTRANGÈRES
+-- ÉTAPE 5 : CONTRAINTES (FK)
 -- ============================================
 
--- COMMUNE → DEPARTEMENT
-ALTER TABLE COMMUNE
-ADD CONSTRAINT fk_commune_departement 
-FOREIGN KEY (code_departement) REFERENCES DEPARTEMENT(code_departement)
-ON DELETE CASCADE
-ON UPDATE CASCADE;
-
--- BIEN → DEPARTEMENT
-ALTER TABLE BIEN
-ADD CONSTRAINT fk_bien_departement 
-FOREIGN KEY (code_departement) REFERENCES DEPARTEMENT(code_departement)
-ON DELETE CASCADE
-ON UPDATE CASCADE;
-
--- BIEN → NATURE_CULTURE
-ALTER TABLE BIEN
-ADD CONSTRAINT fk_bien_nature_culture 
-FOREIGN KEY (nature_culture) REFERENCES NATURE_CULTURE(code_nature_culture)
-ON DELETE SET NULL
-ON UPDATE CASCADE;
+ALTER TABLE COMMUNE ADD CONSTRAINT fk_commune_dept FOREIGN KEY (code_departement) REFERENCES DEPARTEMENT(code_departement);
+ALTER TABLE BIEN ADD CONSTRAINT fk_bien_commune FOREIGN KEY (id_commune) REFERENCES COMMUNE(id_commune);
+ALTER TABLE BIEN ADD CONSTRAINT fk_bien_type FOREIGN KEY (id_type_local) REFERENCES TYPE_LOCAL(id_type_local);
+ALTER TABLE BIEN ADD CONSTRAINT fk_bien_culture FOREIGN KEY (nature_culture) REFERENCES NATURE_CULTURE(code_nature_culture);
+ALTER TABLE MUTATION ADD CONSTRAINT fk_mutation_nature FOREIGN KEY (id_nature_mutation) REFERENCES NATURE_MUTATION(id_nature_mutation);
+ALTER TABLE MUTATION_BIEN ADD CONSTRAINT fk_mb_mutation FOREIGN KEY (id_mutation) REFERENCES MUTATION(id_mutation);
+ALTER TABLE MUTATION_BIEN ADD CONSTRAINT fk_mb_bien FOREIGN KEY (id_bien) REFERENCES BIEN(id_bien);
