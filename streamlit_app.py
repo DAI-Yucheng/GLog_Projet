@@ -153,6 +153,9 @@ LANGUAGES = {
         'q1_most_active_month': '最活跃月份',
         'q1_trend_chart': '📊 趋势图',
         'q1_title': 'Q1: 每月交易数量变化',
+        'q1_chart_title': 'Q1: 每月交易数量变化趋势',
+        'q1_xaxis_label': '月份',
+        'q1_yaxis_label': '交易数量',
         # Q2 相关
         'q2_analysis_purpose': '📊 分析目的',
         'q2_analysis_description': '这个分析旨在了解不同**价格区间**的房产分布情况，识别市场的主要价格段。',
@@ -174,6 +177,9 @@ LANGUAGES = {
         'q2_avg_per_range': '区间平均交易数',
         'q2_distribution_chart': '📊 价格分布图',
         'q2_title': 'Q2: 价格区间分布',
+        'q2_chart_title': 'Q2: 价格区间分布',
+        'q2_xaxis_label': '价格区间',
+        'q2_yaxis_label': '交易数量',
         # Q3 相关
         'q3_analysis_purpose': '📊 分析目的',
         'q3_analysis_description': '这个分析旨在比较不同**交易类型**（如买卖、交换等）的平均价格，了解交易类型对价格的影响。',
@@ -195,6 +201,9 @@ LANGUAGES = {
         'q3_price_difference': '价格差异',
         'q3_comparison_chart': '📊 价格对比图',
         'q3_title': 'Q3: 按交易类型的平均价格',
+        'q3_chart_title': 'Q3: 不同交易类型的平均价格对比',
+        'q3_xaxis_label': '平均价格 (€)',
+        'q3_yaxis_label': '交易类型',
         # Q4 相关
         'q4_analysis_purpose': '📊 分析目的',
         'q4_analysis_description': '这个分析旨在了解市场中不同**房产类型**（公寓、别墅等）的分布比例。',
@@ -215,6 +224,7 @@ LANGUAGES = {
         'q4_most_common_type': '最常见类型',
         'q4_distribution_chart': '📊 类型分布图',
         'q4_title': 'Q4: 房产类型分布',
+        'q4_chart_title': 'Q4: 房产类型分布',
         # Q5 相关
         'q5_analysis_purpose': '📊 分析目的',
         'q5_analysis_description': '这个分析旨在计算**每平方米的平均价格**，比较不同房产类型的单位价格差异。',
@@ -236,6 +246,9 @@ LANGUAGES = {
         'q5_avg_price_m2': '平均单价',
         'q5_price_comparison_chart': '📊 单价对比图',
         'q5_title': 'Q5: 每平方米价格（按类型）',
+        'q5_chart_title': 'Q5: 不同房产类型的单价对比',
+        'q5_xaxis_label': '房产类型',
+        'q5_yaxis_label': '单价 (€/m²)',
         # Q6 相关
         'q6_analysis_purpose': '📊 分析目的',
         'q6_analysis_description': '这个分析旨在分析房产的**房间数分布**，了解市场主流房型。',
@@ -257,6 +270,9 @@ LANGUAGES = {
         'q6_avg_rooms': '平均房间数',
         'q6_distribution_chart': '📊 房间数分布图',
         'q6_title': 'Q6: 房间数分布',
+        'q6_chart_title': 'Q6: 房间数分布',
+        'q6_xaxis_label': '房间数',
+        'q6_yaxis_label': '房产数量',
         # Q7 相关
         'q7_analysis_purpose': '📊 分析目的',
         'q7_analysis_description': '这个分析旨在识别**交易量最大的城市**，了解房地产市场的热点区域。',
@@ -278,6 +294,9 @@ LANGUAGES = {
         'q7_top_city_transactions': '最高城市交易数',
         'q7_ranking_chart': '📊 城市排名图',
         'q7_title': 'Q7: 交易量Top10城市',
+        'q7_chart_title': 'Q7: 交易量前10名城市',
+        'q7_xaxis_label': '交易数量',
+        'q7_yaxis_label': '城市',
         # Q8 相关
         'q8_analysis_purpose': '📊 分析目的',
         'q8_analysis_description': '这个分析旨在比较不同**省份**的平均房产价格，了解地区间的价格差异。',
@@ -299,6 +318,9 @@ LANGUAGES = {
         'q8_price_range': '价格范围',
         'q8_comparison_chart': '📊 省份价格对比图',
         'q8_title': 'Q8: 各省平均价格',
+        'q8_chart_title': 'Q8: 不同省份的平均价格对比',
+        'q8_xaxis_label': '省份',
+        'q8_yaxis_label': '平均价格 (€)',
         # Q9 相关
         'q9_analysis_purpose': '📊 分析目的',
         'q9_analysis_description': '这个分析旨在分析不同**邮政编码区域**的交易量，识别高活跃度的具体区域。',
@@ -320,6 +342,9 @@ LANGUAGES = {
         'q9_top_code_transactions': '最高区域交易数',
         'q9_ranking_chart': '📊 邮政编码排名图',
         'q9_title': 'Q9: 邮政编码交易量Top15',
+        'q9_chart_title': 'Q9: 交易量前15名邮政编码',
+        'q9_xaxis_label': '邮政编码',
+        'q9_yaxis_label': '交易数量',
         # Q10 相关
         'q10_analysis_purpose': '📊 分析目的',
         'q10_analysis_description': '这个分析旨在分析房产**建筑面积的分布情况**，了解市场主流面积范围。',
@@ -341,8 +366,14 @@ LANGUAGES = {
         'q10_avg_surface': '平均面积',
         'q10_distribution_chart': '📊 面积分布图',
         'q10_title': 'Q10: 建筑面积分布',
+        'q10_chart_title': 'Q10: 建筑面积分布',
+        'q10_xaxis_label': '面积区间',
+        'q10_yaxis_label': '房产数量',
         # Q11 相关（Q11没有单独的title，使用通用键）
         'q11_title': 'Q11: 面积与价格相关性',
+        'q11_chart_title': 'Q11: 建筑面积 vs 房产价值相关性',
+        'q11_xaxis_label': '建筑面积 (m²)',
+        'q11_yaxis_label': '房产价值 (€)',
         # Q12 相关
         'q12_analysis_purpose': '📊 分析目的',
         'q12_analysis_description': '这个分析旨在比较不同**土地性质**（如住宅、商业等）的平均土地面积。',
@@ -364,6 +395,9 @@ LANGUAGES = {
         'q12_area_range': '面积范围',
         'q12_comparison_chart': '📊 土地面积对比图',
         'q12_title': 'Q12: 土地性质平均面积',
+        'q12_chart_title': 'Q12: 不同土地性质的平均面积对比',
+        'q12_xaxis_label': '土地性质',
+        'q12_yaxis_label': '平均面积 (m²)',
         # Q13 相关
         'q13_analysis_purpose': '📊 分析目的',
         'q13_analysis_description': '这个分析旨在分析**平均价格的时间趋势**，了解市场价格的波动情况。',
@@ -385,6 +419,9 @@ LANGUAGES = {
         'q13_current_avg_price': '当前平均价格',
         'q13_trend_chart': '📊 价格趋势图',
         'q13_title': 'Q13: 月度平均价格变化',
+        'q13_chart_title': 'Q13: 月度平均价格变化趋势',
+        'q13_xaxis_label': '月份',
+        'q13_yaxis_label': '平均价格 (€)',
         # Q14 相关
         'q14_analysis_purpose': '📊 分析目的',
         'q14_analysis_description': '这个分析旨在比较不同**房产类型**的价格统计（平均、最低、最高），全面了解价格分布。',
@@ -405,6 +442,9 @@ LANGUAGES = {
         'q14_largest_range': '最大价格范围',
         'q14_price_comparison_chart': '📊 价格对比图',
         'q14_title': 'Q14: 房产类型价格对比',
+        'q14_chart_title': 'Q14: 不同房产类型的价格对比',
+        'q14_xaxis_label': '房产类型',
+        'q14_yaxis_label': '价格 (€)',
         # Q15 相关
         'q15_analysis_purpose': '📊 分析目的',
         'q15_analysis_description': '这个分析旨在对比**房屋和公寓**的价格分布，了解两种主要房产类型的价格差异。',
@@ -427,6 +467,9 @@ LANGUAGES = {
         'q15_apartment_median': '公寓中位数价格',
         'q15_distribution_chart': '📊 价格分布对比图',
         'q15_title': 'Q15: 房屋vs公寓价格分布',
+        'q15_chart_title': 'Q15: 房屋vs公寓价格分布对比',
+        'q15_xaxis_label': '价格 (€)',
+        'q15_yaxis_label': '密度',
         # Q16 相关
         'q16_analysis_purpose': '📊 分析目的',
         'q16_analysis_description': '这个分析旨在计算**土地面积与建筑面积的比值**，了解不同城市的土地利用情况。',
@@ -448,6 +491,9 @@ LANGUAGES = {
         'q16_avg_ratio': '平均比值',
         'q16_ranking_chart': '📊 比值排名图',
         'q16_title': 'Q16: 土地/建筑面积比Top10',
+        'q16_chart_title': 'Q16: 土地/建筑面积比Top10城市',
+        'q16_xaxis_label': '比值',
+        'q16_yaxis_label': '城市',
         # Q17 相关
         'q17_analysis_purpose': '📊 分析目的',
         'q17_analysis_description': '这个分析旨在分析**每笔交易包含的房产数量**，了解交易的复杂性。',
@@ -469,6 +515,9 @@ LANGUAGES = {
         'q17_avg_properties': '平均房产数',
         'q17_distribution_chart': '📊 交易复杂度分布图',
         'q17_title': 'Q17: 每笔交易的房产数量',
+        'q17_chart_title': 'Q17: 每笔交易的房产数量分布',
+        'q17_xaxis_label': '房产数量',
+        'q17_yaxis_label': '交易数量',
         # Q18 相关
         'q18_analysis_purpose': '📊 分析目的',
         'q18_analysis_description': '这个分析旨在统计**有土地和无土地房产的数量**，了解不同房产类型的特征。',
@@ -490,6 +539,9 @@ LANGUAGES = {
         'q18_land_ownership_rate': '土地拥有率',
         'q18_comparison_chart': '📊 土地拥有情况对比图',
         'q18_title': 'Q18: 有/无土地房产统计',
+        'q18_chart_title': 'Q18: 有/无土地房产统计对比',
+        'q18_xaxis_label': '房产类型',
+        'q18_yaxis_label': '数量',
         # Q19 相关
         'q19_analysis_purpose': '📊 分析目的',
         'q19_analysis_description': '这个分析旨在分析**一周中不同日期的交易分布**，了解交易的时间模式。',
@@ -511,6 +563,9 @@ LANGUAGES = {
         'q19_weekday_avg': '工作日平均',
         'q19_distribution_chart': '📊 日期分布图',
         'q19_title': 'Q19: 一周交易分布',
+        'q19_chart_title': 'Q19: 一周交易分布',
+        'q19_xaxis_label': '星期',
+        'q19_yaxis_label': '交易数量',
         # Q20 相关
         'q20_analysis_purpose': '📊 分析目的',
         'q20_analysis_description': '这个分析旨在分析**每周的交易量和交易总额**，了解市场的周度变化趋势。',
@@ -533,6 +588,10 @@ LANGUAGES = {
         'q20_avg_volume_per_week': '周均交易额',
         'q20_trend_chart': '📊 周度趋势图',
         'q20_title': 'Q20: 周交易量分析',
+        'q20_chart_title': 'Q20: 每周交易量和交易总额趋势',
+        'q20_xaxis_label': '周',
+        'q20_yaxis_label_1': '交易数量',
+        'q20_yaxis_label_2': '交易总额 (€)',
     },
     'fr': {
         'app_title': '🏠 Plateforme d\'analyse des données DVF',
@@ -665,6 +724,9 @@ LANGUAGES = {
         'q1_most_active_month': 'Mois le plus actif',
         'q1_trend_chart': '📊 Graphique de tendance',
         'q1_title': 'Q1: Évolution du nombre de mutations par mois',
+        'q1_chart_title': 'Q1: Évolution du nombre de mutations par mois',
+        'q1_xaxis_label': 'Mois',
+        'q1_yaxis_label': 'Nombre de mutations',
         # Q2 相关
         'q2_analysis_purpose': '📊 Objectif de l\'analyse',
         'q2_analysis_description': 'Cette analyse vise à comprendre la distribution des biens immobiliers dans différentes **tranches de prix** pour identifier les segments principaux du marché.',
@@ -686,6 +748,9 @@ LANGUAGES = {
         'q2_avg_per_range': 'Moyenne par tranche',
         'q2_distribution_chart': '📊 Graphique de distribution',
         'q2_title': 'Q2: Distribution des valeurs foncières par tranche',
+        'q2_chart_title': 'Q2: Distribution des valeurs foncières par tranche',
+        'q2_xaxis_label': 'Tranche de prix',
+        'q2_yaxis_label': 'Nombre de mutations',
         # Q3 相关
         'q3_analysis_purpose': '📊 Objectif de l\'analyse',
         'q3_analysis_description': 'Cette analyse vise à comparer les prix moyens par **type de transaction** (vente, échange, etc.) pour comprendre l\'impact du type de transaction sur le prix.',
@@ -707,6 +772,9 @@ LANGUAGES = {
         'q3_price_difference': 'Différence de prix',
         'q3_comparison_chart': '📊 Graphique de comparaison',
         'q3_title': 'Q3: Valeur foncière moyenne par nature de mutation',
+        'q3_chart_title': 'Q3: Valeur foncière moyenne par nature de mutation',
+        'q3_xaxis_label': 'Valeur moyenne (€)',
+        'q3_yaxis_label': 'Nature de mutation',
         # Q4 相关
         'q4_analysis_purpose': '📊 Objectif de l\'analyse',
         'q4_analysis_description': 'Cette analyse vise à comprendre la distribution proportionnelle des différents **types de biens** (appartements, maisons, etc.) sur le marché.',
@@ -727,6 +795,7 @@ LANGUAGES = {
         'q4_most_common_type': 'Type le plus courant',
         'q4_distribution_chart': '📊 Graphique de distribution',
         'q4_title': 'Q4: Répartition des biens par type de local',
+        'q4_chart_title': 'Q4: Répartition des biens par type de local',
         # Q5 相关
         'q5_analysis_purpose': '📊 Objectif de l\'analyse',
         'q5_analysis_description': 'Cette analyse vise à calculer le **prix moyen au m²** et comparer les différences de prix unitaire entre différents types de biens.',
@@ -748,6 +817,9 @@ LANGUAGES = {
         'q5_avg_price_m2': 'Prix unitaire moyen',
         'q5_price_comparison_chart': '📊 Graphique de comparaison des prix',
         'q5_title': 'Q5: Prix moyen au m² par type de local',
+        'q5_chart_title': 'Q5: Prix moyen au m² par type de local',
+        'q5_xaxis_label': 'Type de local',
+        'q5_yaxis_label': 'Prix au m² (€)',
         # Q6 相关
         'q6_analysis_purpose': '📊 Objectif de l\'analyse',
         'q6_analysis_description': 'Cette analyse vise à analyser la **distribution du nombre de pièces** pour comprendre les types de logements dominants sur le marché.',
@@ -769,6 +841,9 @@ LANGUAGES = {
         'q6_avg_rooms': 'Nombre moyen de pièces',
         'q6_distribution_chart': '📊 Graphique de distribution',
         'q6_title': 'Q6: Distribution du nombre de pièces principales',
+        'q6_chart_title': 'Q6: Distribution du nombre de pièces principales',
+        'q6_xaxis_label': 'Nombre de pièces',
+        'q6_yaxis_label': 'Nombre de biens',
         # Q7 相关
         'q7_analysis_purpose': '📊 Objectif de l\'analyse',
         'q7_analysis_description': 'Cette analyse vise à identifier les **villes avec le plus grand volume de transactions** pour comprendre les zones chaudes du marché immobilier.',
@@ -790,6 +865,9 @@ LANGUAGES = {
         'q7_top_city_transactions': 'Transactions de la ville en tête',
         'q7_ranking_chart': '📊 Graphique de classement',
         'q7_title': 'Q7: Top 10 des communes par nombre de transactions',
+        'q7_chart_title': 'Q7: Top 10 des communes par nombre de transactions',
+        'q7_xaxis_label': 'Nombre de transactions',
+        'q7_yaxis_label': 'Commune',
         # Q8 相关
         'q8_analysis_purpose': '📊 Objectif de l\'analyse',
         'q8_analysis_description': 'Cette analyse vise à comparer les prix moyens des biens immobiliers par **département** pour comprendre les différences de prix entre régions.',
@@ -811,6 +889,9 @@ LANGUAGES = {
         'q8_price_range': 'Plage de prix',
         'q8_comparison_chart': '📊 Graphique de comparaison',
         'q8_title': 'Q8: Valeur foncière moyenne par département',
+        'q8_chart_title': 'Q8: Valeur foncière moyenne par département',
+        'q8_xaxis_label': 'Département',
+        'q8_yaxis_label': 'Valeur moyenne (€)',
         # Q9 相关
         'q9_analysis_purpose': '📊 Objectif de l\'analyse',
         'q9_analysis_description': 'Cette analyse vise à analyser le volume de transactions par **code postal** pour identifier les zones spécifiques à forte activité.',
@@ -832,6 +913,9 @@ LANGUAGES = {
         'q9_top_code_transactions': 'Transactions de la zone en tête',
         'q9_ranking_chart': '📊 Graphique de classement',
         'q9_title': 'Q9: Top 15 des codes postaux par nombre de transactions',
+        'q9_chart_title': 'Q9: Top 15 des codes postaux par nombre de transactions',
+        'q9_xaxis_label': 'Code postal',
+        'q9_yaxis_label': 'Nombre de transactions',
         # Q10 相关
         'q10_analysis_purpose': '📊 Objectif de l\'analyse',
         'q10_analysis_description': 'Cette analyse vise à analyser la **distribution des surfaces bâties** pour comprendre les gammes de surface dominantes sur le marché.',
@@ -853,8 +937,14 @@ LANGUAGES = {
         'q10_avg_surface': 'Surface moyenne',
         'q10_distribution_chart': '📊 Graphique de distribution',
         'q10_title': 'Q10: Distribution des surfaces bâties',
+        'q10_chart_title': 'Q10: Distribution des surfaces bâties',
+        'q10_xaxis_label': 'Tranche de surface',
+        'q10_yaxis_label': 'Nombre de biens',
         # Q11 相关
         'q11_title': 'Q11: Corrélation surface bâtie vs valeur foncière',
+        'q11_chart_title': 'Q11: Corrélation surface bâtie vs valeur foncière',
+        'q11_xaxis_label': 'Surface bâtie (m²)',
+        'q11_yaxis_label': 'Valeur foncière (€)',
         # Q12 相关
         'q12_analysis_purpose': '📊 Objectif de l\'analyse',
         'q12_analysis_description': 'Cette analyse vise à comparer les surfaces moyennes des terrains par **nature de culture** (résidentiel, commercial, etc.).',
@@ -876,6 +966,9 @@ LANGUAGES = {
         'q12_area_range': 'Plage de surface',
         'q12_comparison_chart': '📊 Graphique de comparaison',
         'q12_title': 'Q12: Surface terrain moyenne par nature de culture',
+        'q12_chart_title': 'Q12: Surface terrain moyenne par nature de culture',
+        'q12_xaxis_label': 'Nature de culture',
+        'q12_yaxis_label': 'Surface moyenne (m²)',
         # Q13 相关
         'q13_analysis_purpose': '📊 Objectif de l\'analyse',
         'q13_analysis_description': 'Cette analyse vise à analyser les **tendances temporelles des prix moyens** pour comprendre les fluctuations du marché.',
@@ -897,6 +990,9 @@ LANGUAGES = {
         'q13_current_avg_price': 'Prix moyen actuel',
         'q13_trend_chart': '📊 Graphique de tendance',
         'q13_title': 'Q13: Évolution du prix moyen mensuel',
+        'q13_chart_title': 'Q13: Évolution du prix moyen mensuel',
+        'q13_xaxis_label': 'Mois',
+        'q13_yaxis_label': 'Prix moyen (€)',
         # Q14 相关
         'q14_analysis_purpose': '📊 Objectif de l\'analyse',
         'q14_analysis_description': 'Cette analyse vise à comparer les statistiques de prix (moyen, minimum, maximum) par **type de bien** pour comprendre globalement la distribution des prix.',
@@ -917,6 +1013,9 @@ LANGUAGES = {
         'q14_largest_range': 'Fourchette de prix la plus large',
         'q14_price_comparison_chart': '📊 Graphique de comparaison',
         'q14_title': 'Q14: Comparaison des prix par type de bien',
+        'q14_chart_title': 'Q14: Comparaison des prix par type de bien',
+        'q14_xaxis_label': 'Type de bien',
+        'q14_yaxis_label': 'Prix (€)',
         # Q15 相关
         'q15_analysis_purpose': '📊 Objectif de l\'analyse',
         'q15_analysis_description': 'Cette analyse vise à comparer la distribution des prix des **maisons et des appartements** pour comprendre les différences de prix entre les deux principaux types de biens.',
@@ -939,6 +1038,9 @@ LANGUAGES = {
         'q15_apartment_median': 'Prix médian des appartements',
         'q15_distribution_chart': '📊 Graphique de distribution',
         'q15_title': 'Q15: Distribution des prix - Maisons vs Appartements',
+        'q15_chart_title': 'Q15: Distribution des prix - Maisons vs Appartements',
+        'q15_xaxis_label': 'Prix (€)',
+        'q15_yaxis_label': 'Densité',
         # Q16 相关
         'q16_analysis_purpose': '📊 Objectif de l\'analyse',
         'q16_analysis_description': 'Cette analyse vise à calculer le **ratio entre surface de terrain et surface bâtie** pour comprendre l\'utilisation des terres dans différentes villes.',
@@ -960,6 +1062,9 @@ LANGUAGES = {
         'q16_avg_ratio': 'Ratio moyen',
         'q16_ranking_chart': '📊 Graphique de classement',
         'q16_title': 'Q16: Ratio surface terrain/surface bâtie par commune',
+        'q16_chart_title': 'Q16: Ratio surface terrain/surface bâtie par commune',
+        'q16_xaxis_label': 'Ratio',
+        'q16_yaxis_label': 'Commune',
         # Q17 相关
         'q17_analysis_purpose': '📊 Objectif de l\'analyse',
         'q17_analysis_description': 'Cette analyse vise à analyser le **nombre de biens par transaction** pour comprendre la complexité des transactions.',
@@ -981,6 +1086,9 @@ LANGUAGES = {
         'q17_avg_properties': 'Nombre moyen de biens',
         'q17_distribution_chart': '📊 Graphique de distribution',
         'q17_title': 'Q17: Nombre de biens par transaction',
+        'q17_chart_title': 'Q17: Nombre de biens par transaction',
+        'q17_xaxis_label': 'Nombre de biens',
+        'q17_yaxis_label': 'Nombre de transactions',
         # Q18 相关
         'q18_analysis_purpose': '📊 Objectif de l\'analyse',
         'q18_analysis_description': 'Cette analyse vise à statistiquer le **nombre de biens avec et sans terrain** pour comprendre les caractéristiques des différents types de biens.',
@@ -1002,6 +1110,9 @@ LANGUAGES = {
         'q18_land_ownership_rate': 'Taux de possession de terrain',
         'q18_comparison_chart': '📊 Graphique de comparaison',
         'q18_title': 'Q18: Biens avec/sans terrain par type',
+        'q18_chart_title': 'Q18: Biens avec/sans terrain par type',
+        'q18_xaxis_label': 'Type de bien',
+        'q18_yaxis_label': 'Nombre',
         # Q19 相关
         'q19_analysis_purpose': '📊 Objectif de l\'analyse',
         'q19_analysis_description': 'Cette analyse vise à analyser la **distribution des transactions par jour de la semaine** pour comprendre les modèles temporels des transactions.',
@@ -1023,6 +1134,9 @@ LANGUAGES = {
         'q19_weekday_avg': 'Moyenne des jours ouvrables',
         'q19_distribution_chart': '📊 Graphique de distribution',
         'q19_title': 'Q19: Transactions par jour de la semaine',
+        'q19_chart_title': 'Q19: Transactions par jour de la semaine',
+        'q19_xaxis_label': 'Jour de la semaine',
+        'q19_yaxis_label': 'Nombre de transactions',
         # Q20 相关
         'q20_analysis_purpose': '📊 Objectif de l\'analyse',
         'q20_analysis_description': 'Cette analyse vise à analyser le **volume et le montant total des transactions par semaine** pour comprendre les tendances de changement hebdomadaire du marché.',
@@ -1045,6 +1159,10 @@ LANGUAGES = {
         'q20_avg_volume_per_week': 'Volume moyen par semaine',
         'q20_trend_chart': '📊 Graphique de tendance',
         'q20_title': 'Q20: Évolution du volume de ventes par semaine',
+        'q20_chart_title': 'Q20: Évolution du volume de ventes par semaine',
+        'q20_xaxis_label': 'Semaine',
+        'q20_yaxis_label_1': 'Nombre de transactions',
+        'q20_yaxis_label_2': 'Volume total (€)',
     },
     'en': {
         'app_title': '🏠 DVF Real Estate Transaction Data Analysis Platform',
@@ -1137,6 +1255,9 @@ LANGUAGES = {
         'q1_most_active_month': 'Most Active Month',
         'q1_trend_chart': '📊 Trend Chart',
         'q1_title': 'Q1: Monthly Transaction Volume Evolution',
+        'q1_chart_title': 'Q1: Monthly Transaction Volume Evolution',
+        'q1_xaxis_label': 'Month',
+        'q1_yaxis_label': 'Number of Transactions',
         # Q2 相关
         'q2_analysis_purpose': '📊 Analysis Purpose',
         'q2_analysis_description': 'This analysis aims to understand the distribution of properties across different **price ranges** to identify the main price segments of the market.',
@@ -1158,6 +1279,9 @@ LANGUAGES = {
         'q2_avg_per_range': 'Average per Range',
         'q2_distribution_chart': '📊 Distribution Chart',
         'q2_title': 'Q2: Price Range Distribution',
+        'q2_chart_title': 'Q2: Price Range Distribution',
+        'q2_xaxis_label': 'Price Range',
+        'q2_yaxis_label': 'Number of Transactions',
         # Q3 相关
         'q3_analysis_purpose': '📊 Analysis Purpose',
         'q3_analysis_description': 'This analysis aims to compare average prices across different **transaction types** (such as sale, exchange, etc.) to understand the impact of transaction type on price.',
@@ -1179,6 +1303,9 @@ LANGUAGES = {
         'q3_price_difference': 'Price Difference',
         'q3_comparison_chart': '📊 Comparison Chart',
         'q3_title': 'Q3: Average Price by Transaction Type',
+        'q3_chart_title': 'Q3: Average Price by Transaction Type',
+        'q3_xaxis_label': 'Average Price (€)',
+        'q3_yaxis_label': 'Transaction Type',
         # Q4 相关
         'q4_analysis_purpose': '📊 Analysis Purpose',
         'q4_analysis_description': 'This analysis aims to understand the proportional distribution of different **property types** (apartments, houses, etc.) in the market.',
@@ -1199,6 +1326,7 @@ LANGUAGES = {
         'q4_most_common_type': 'Most Common Type',
         'q4_distribution_chart': '📊 Distribution Chart',
         'q4_title': 'Q4: Property Type Distribution',
+        'q4_chart_title': 'Q4: Property Type Distribution',
         # Q5 相关
         'q5_analysis_purpose': '📊 Analysis Purpose',
         'q5_analysis_description': 'This analysis aims to calculate the **average price per square meter** and compare unit price differences across different property types.',
@@ -1220,6 +1348,9 @@ LANGUAGES = {
         'q5_avg_price_m2': 'Average Unit Price',
         'q5_price_comparison_chart': '📊 Price Comparison Chart',
         'q5_title': 'Q5: Price per Square Meter (by Type)',
+        'q5_chart_title': 'Q5: Price per Square Meter (by Type)',
+        'q5_xaxis_label': 'Property Type',
+        'q5_yaxis_label': 'Price per m² (€)',
         # Q6 相关
         'q6_analysis_purpose': '📊 Analysis Purpose',
         'q6_analysis_description': 'This analysis aims to analyze the **distribution of room numbers** in properties to understand the dominant housing types in the market.',
@@ -1241,6 +1372,9 @@ LANGUAGES = {
         'q6_avg_rooms': 'Average Room Count',
         'q6_distribution_chart': '📊 Distribution Chart',
         'q6_title': 'Q6: Room Count Distribution',
+        'q6_chart_title': 'Q6: Room Count Distribution',
+        'q6_xaxis_label': 'Room Count',
+        'q6_yaxis_label': 'Number of Properties',
         # Q7 相关
         'q7_analysis_purpose': '📊 Analysis Purpose',
         'q7_analysis_description': 'This analysis aims to identify **cities with the highest transaction volumes** to understand hot spots in the real estate market.',
@@ -1262,6 +1396,9 @@ LANGUAGES = {
         'q7_top_city_transactions': 'Top City Transactions',
         'q7_ranking_chart': '📊 Ranking Chart',
         'q7_title': 'Q7: Top 10 Cities by Transaction Volume',
+        'q7_chart_title': 'Q7: Top 10 Cities by Transaction Volume',
+        'q7_xaxis_label': 'Number of Transactions',
+        'q7_yaxis_label': 'City',
         # Q8 相关
         'q8_analysis_purpose': '📊 Analysis Purpose',
         'q8_analysis_description': 'This analysis aims to compare average property prices across different **departments** to understand price differences between regions.',
@@ -1283,6 +1420,9 @@ LANGUAGES = {
         'q8_price_range': 'Price Range',
         'q8_comparison_chart': '📊 Comparison Chart',
         'q8_title': 'Q8: Average Price by Department',
+        'q8_chart_title': 'Q8: Average Price by Department',
+        'q8_xaxis_label': 'Department',
+        'q8_yaxis_label': 'Average Price (€)',
         # Q9 相关
         'q9_analysis_purpose': '📊 Analysis Purpose',
         'q9_analysis_description': 'This analysis aims to analyze transaction volumes by **postal code area** to identify specific high-activity areas.',
@@ -1304,6 +1444,9 @@ LANGUAGES = {
         'q9_top_code_transactions': 'Top Area Transactions',
         'q9_ranking_chart': '📊 Ranking Chart',
         'q9_title': 'Q9: Top 15 Postal Codes by Transaction Volume',
+        'q9_chart_title': 'Q9: Top 15 Postal Codes by Transaction Volume',
+        'q9_xaxis_label': 'Postal Code',
+        'q9_yaxis_label': 'Number of Transactions',
         # Q10 相关
         'q10_analysis_purpose': '📊 Analysis Purpose',
         'q10_analysis_description': 'This analysis aims to analyze the **distribution of built surface areas** to understand the dominant area ranges in the market.',
@@ -1325,6 +1468,9 @@ LANGUAGES = {
         'q10_avg_surface': 'Average Surface',
         'q10_distribution_chart': '📊 Distribution Chart',
         'q10_title': 'Q10: Built Surface Area Distribution',
+        'q10_chart_title': 'Q10: Built Surface Area Distribution',
+        'q10_xaxis_label': 'Area Range',
+        'q10_yaxis_label': 'Number of Properties',
         # Q11 相关
         'analysis_purpose': '📊 Analysis Purpose',
         'analysis_description': 'This analysis aims to explore the correlation between **built surface area** and **property value**.',
@@ -1366,6 +1512,9 @@ LANGUAGES = {
         'trendline_note_no': 'As correlation is weak (|r| < 0.3), no trendline is shown because the linear relationship is not obvious.',
         'correlation_coefficient': 'Overall Correlation Coefficient r',
         'q11_title': 'Q11: Surface Area vs Property Value Correlation',
+        'q11_chart_title': 'Q11: Surface Area vs Property Value Correlation',
+        'q11_xaxis_label': 'Built Surface Area (m²)',
+        'q11_yaxis_label': 'Property Value (€)',
         # Q12 相关
         'q12_analysis_purpose': '📊 Analysis Purpose',
         'q12_analysis_description': 'This analysis aims to compare average land areas by **land nature** (residential, commercial, etc.).',
@@ -1387,6 +1536,9 @@ LANGUAGES = {
         'q12_area_range': 'Area Range',
         'q12_comparison_chart': '📊 Comparison Chart',
         'q12_title': 'Q12: Average Land Area by Land Nature',
+        'q12_chart_title': 'Q12: Average Land Area by Land Nature',
+        'q12_xaxis_label': 'Land Nature',
+        'q12_yaxis_label': 'Average Area (m²)',
         # Q13 相关
         'q13_analysis_purpose': '📊 Analysis Purpose',
         'q13_analysis_description': 'This analysis aims to analyze **temporal trends of average prices** to understand market price fluctuations.',
@@ -1408,6 +1560,9 @@ LANGUAGES = {
         'q13_current_avg_price': 'Current Average Price',
         'q13_trend_chart': '📊 Trend Chart',
         'q13_title': 'Q13: Monthly Average Price Evolution',
+        'q13_chart_title': 'Q13: Monthly Average Price Evolution',
+        'q13_xaxis_label': 'Month',
+        'q13_yaxis_label': 'Average Price (€)',
         # Q14 相关
         'q14_analysis_purpose': '📊 Analysis Purpose',
         'q14_analysis_description': 'This analysis aims to compare price statistics (average, minimum, maximum) by **property type** to comprehensively understand price distribution.',
@@ -1428,6 +1583,9 @@ LANGUAGES = {
         'q14_largest_range': 'Largest Price Range',
         'q14_price_comparison_chart': '📊 Price Comparison Chart',
         'q14_title': 'Q14: Price Comparison by Property Type',
+        'q14_chart_title': 'Q14: Price Comparison by Property Type',
+        'q14_xaxis_label': 'Property Type',
+        'q14_yaxis_label': 'Price (€)',
         # Q15 相关
         'q15_analysis_purpose': '📊 Analysis Purpose',
         'q15_analysis_description': 'This analysis aims to compare price distributions of **houses and apartments** to understand price differences between the two main property types.',
@@ -1450,6 +1608,9 @@ LANGUAGES = {
         'q15_apartment_median': 'Apartment Median Price',
         'q15_distribution_chart': '📊 Distribution Chart',
         'q15_title': 'Q15: Price Distribution - Houses vs Apartments',
+        'q15_chart_title': 'Q15: Price Distribution - Houses vs Apartments',
+        'q15_xaxis_label': 'Price (€)',
+        'q15_yaxis_label': 'Density',
         # Q16 相关
         'q16_analysis_purpose': '📊 Analysis Purpose',
         'q16_analysis_description': 'This analysis aims to calculate the **ratio of land area to built area** to understand land use in different cities.',
@@ -1471,6 +1632,9 @@ LANGUAGES = {
         'q16_avg_ratio': 'Average Ratio',
         'q16_ranking_chart': '📊 Ranking Chart',
         'q16_title': 'Q16: Land/Built Area Ratio Top 10',
+        'q16_chart_title': 'Q16: Land/Built Area Ratio Top 10',
+        'q16_xaxis_label': 'Ratio',
+        'q16_yaxis_label': 'City',
         # Q17 相关
         'q17_analysis_purpose': '📊 Analysis Purpose',
         'q17_analysis_description': 'This analysis aims to analyze the **number of properties per transaction** to understand transaction complexity.',
@@ -1492,6 +1656,9 @@ LANGUAGES = {
         'q17_avg_properties': 'Average Property Count',
         'q17_distribution_chart': '📊 Distribution Chart',
         'q17_title': 'Q17: Number of Properties per Transaction',
+        'q17_chart_title': 'Q17: Number of Properties per Transaction',
+        'q17_xaxis_label': 'Number of Properties',
+        'q17_yaxis_label': 'Number of Transactions',
         # Q18 相关
         'q18_analysis_purpose': '📊 Analysis Purpose',
         'q18_analysis_description': 'This analysis aims to count **properties with and without land** to understand characteristics of different property types.',
@@ -1513,6 +1680,9 @@ LANGUAGES = {
         'q18_land_ownership_rate': 'Land Ownership Rate',
         'q18_comparison_chart': '📊 Comparison Chart',
         'q18_title': 'Q18: Properties with/without Land Statistics',
+        'q18_chart_title': 'Q18: Properties with/without Land Statistics',
+        'q18_xaxis_label': 'Property Type',
+        'q18_yaxis_label': 'Count',
         # Q19 相关
         'q19_analysis_purpose': '📊 Analysis Purpose',
         'q19_analysis_description': 'This analysis aims to analyze **transaction distribution by day of week** to understand transaction time patterns.',
@@ -1534,6 +1704,9 @@ LANGUAGES = {
         'q19_weekday_avg': 'Weekday Average',
         'q19_distribution_chart': '📊 Distribution Chart',
         'q19_title': 'Q19: Weekly Transaction Distribution',
+        'q19_chart_title': 'Q19: Weekly Transaction Distribution',
+        'q19_xaxis_label': 'Day of Week',
+        'q19_yaxis_label': 'Number of Transactions',
         # Q20 相关
         'q20_analysis_purpose': '📊 Analysis Purpose',
         'q20_analysis_description': 'This analysis aims to analyze **weekly transaction volume and total transaction value** to understand weekly market trends.',
@@ -1556,6 +1729,10 @@ LANGUAGES = {
         'q20_avg_volume_per_week': 'Average Value per Week',
         'q20_trend_chart': '📊 Weekly Trend Chart',
         'q20_title': 'Q20: Weekly Transaction Volume Analysis',
+        'q20_chart_title': 'Q20: Weekly Transaction Volume and Total Value Trends',
+        'q20_xaxis_label': 'Week',
+        'q20_yaxis_label_1': 'Number of Transactions',
+        'q20_yaxis_label_2': 'Total Value (€)',
     },
     'ar': {
         'app_title': '🏠 منصة تحليل بيانات معاملات العقارات DVF',
@@ -1648,6 +1825,9 @@ LANGUAGES = {
         'q1_most_active_month': 'أكثر شهر نشاطاً',
         'q1_trend_chart': '📊 مخطط الاتجاه',
         'q1_title': 'Q1: تطور عدد المعاملات الشهرية',
+        'q1_chart_title': 'Q1: تطور عدد المعاملات الشهرية',
+        'q1_xaxis_label': 'الشهر',
+        'q1_yaxis_label': 'عدد المعاملات',
         # Q2 相关
         'q2_analysis_purpose': '📊 هدف التحليل',
         'q2_analysis_description': 'يهدف هذا التحليل إلى فهم توزيع العقارات عبر **نطاقات أسعار** مختلفة لتحديد شرائح الأسعار الرئيسية في السوق.',
@@ -1669,6 +1849,9 @@ LANGUAGES = {
         'q2_avg_per_range': 'المتوسط لكل نطاق',
         'q2_distribution_chart': '📊 مخطط التوزيع',
         'q2_title': 'Q2: توزيع نطاقات الأسعار',
+        'q2_chart_title': 'Q2: توزيع نطاقات الأسعار',
+        'q2_xaxis_label': 'نطاق السعر',
+        'q2_yaxis_label': 'عدد المعاملات',
         # Q3 相关
         'q3_analysis_purpose': '📊 هدف التحليل',
         'q3_analysis_description': 'يهدف هذا التحليل إلى مقارنة متوسطات الأسعار عبر **أنواع المعاملات** المختلفة (مثل البيع والتبادل وما إلى ذلك) لفهم تأثير نوع المعاملة على السعر.',
@@ -1690,6 +1873,9 @@ LANGUAGES = {
         'q3_price_difference': 'الفرق في السعر',
         'q3_comparison_chart': '📊 مخطط المقارنة',
         'q3_title': 'Q3: متوسط السعر حسب نوع المعاملة',
+        'q3_chart_title': 'Q3: متوسط السعر حسب نوع المعاملة',
+        'q3_xaxis_label': 'متوسط السعر (€)',
+        'q3_yaxis_label': 'نوع المعاملة',
         # Q4 相关
         'q4_analysis_purpose': '📊 هدف التحليل',
         'q4_analysis_description': 'يهدف هذا التحليل إلى فهم التوزيع النسبي لـ **أنواع العقارات** المختلفة (الشقق والمنازل وما إلى ذلك) في السوق.',
@@ -1961,6 +2147,9 @@ LANGUAGES = {
         'q15_apartment_median': 'السعر الوسيط للشقق',
         'q15_distribution_chart': '📊 مخطط التوزيع',
         'q15_title': 'Q15: توزيع الأسعار - المنازل مقابل الشقق',
+        'q15_chart_title': 'Q15: توزيع الأسعار - المنازل مقابل الشقق',
+        'q15_xaxis_label': 'السعر (€)',
+        'q15_yaxis_label': 'الكثافة',
         # Q16 相关
         'q16_analysis_purpose': '📊 هدف التحليل',
         'q16_analysis_description': 'يهدف هذا التحليل إلى حساب **نسبة مساحة الأرض إلى المساحة المبنية** لفهم استخدام الأراضي في مدن مختلفة.',
@@ -1982,6 +2171,9 @@ LANGUAGES = {
         'q16_avg_ratio': 'متوسط النسبة',
         'q16_ranking_chart': '📊 مخطط الترتيب',
         'q16_title': 'Q16: نسبة الأرض/المساحة المبنية أعلى 10',
+        'q16_chart_title': 'Q16: نسبة الأرض/المساحة المبنية أعلى 10',
+        'q16_xaxis_label': 'النسبة',
+        'q16_yaxis_label': 'المدينة',
         # Q17 相关
         'q17_analysis_purpose': '📊 هدف التحليل',
         'q17_analysis_description': 'يهدف هذا التحليل إلى تحليل **عدد العقارات لكل معاملة** لفهم تعقيد المعاملات.',
@@ -2003,6 +2195,9 @@ LANGUAGES = {
         'q17_avg_properties': 'متوسط عدد العقارات',
         'q17_distribution_chart': '📊 مخطط التوزيع',
         'q17_title': 'Q17: عدد العقارات لكل معاملة',
+        'q17_chart_title': 'Q17: عدد العقارات لكل معاملة',
+        'q17_xaxis_label': 'عدد العقارات',
+        'q17_yaxis_label': 'عدد المعاملات',
         # Q18 相关
         'q18_analysis_purpose': '📊 هدف التحليل',
         'q18_analysis_description': 'يهدف هذا التحليل إلى إحصاء **العقارات ذات الأرض وبدون أرض** لفهم خصائص أنواع العقارات المختلفة.',
@@ -2024,6 +2219,9 @@ LANGUAGES = {
         'q18_land_ownership_rate': 'معدل ملكية الأرض',
         'q18_comparison_chart': '📊 مخطط المقارنة',
         'q18_title': 'Q18: إحصائيات العقارات مع/بدون أرض',
+        'q18_chart_title': 'Q18: إحصائيات العقارات مع/بدون أرض',
+        'q18_xaxis_label': 'نوع العقار',
+        'q18_yaxis_label': 'العدد',
         # Q19 相关
         'q19_analysis_purpose': '📊 هدف التحليل',
         'q19_analysis_description': 'يهدف هذا التحليل إلى تحليل **توزيع المعاملات حسب يوم الأسبوع** لفهم أنماط وقت المعاملات.',
@@ -2045,6 +2243,9 @@ LANGUAGES = {
         'q19_weekday_avg': 'متوسط أيام الأسبوع',
         'q19_distribution_chart': '📊 مخطط التوزيع',
         'q19_title': 'Q19: توزيع المعاملات الأسبوعي',
+        'q19_chart_title': 'Q19: توزيع المعاملات الأسبوعي',
+        'q19_xaxis_label': 'يوم الأسبوع',
+        'q19_yaxis_label': 'عدد المعاملات',
         # Q20 相关
         'q20_analysis_purpose': '📊 هدف التحليل',
         'q20_analysis_description': 'يهدف هذا التحليل إلى تحليل **حجم المعاملات الأسبوعي وإجمالي قيمة المعاملات** لفهم اتجاهات السوق الأسبوعية.',
@@ -2067,6 +2268,10 @@ LANGUAGES = {
         'q20_avg_volume_per_week': 'متوسط القيمة لكل أسبوع',
         'q20_trend_chart': '📊 مخطط الاتجاه الأسبوعي',
         'q20_title': 'Q20: تحليل حجم المعاملات الأسبوعي',
+        'q20_chart_title': 'Q20: اتجاهات حجم المعاملات الأسبوعي وإجمالي القيمة',
+        'q20_xaxis_label': 'الأسبوع',
+        'q20_yaxis_label_1': 'عدد المعاملات',
+        'q20_yaxis_label_2': 'إجمالي القيمة (€)',
     },
     'mg': {
         'app_title': '🏠 Platforma Fikarohana angon-drakitra DVF',
@@ -2159,6 +2364,9 @@ LANGUAGES = {
         'q1_most_active_month': 'Volana mavitrika indrindra',
         'q1_trend_chart': '📊 Sary tendance',
         'q1_title': 'Q1: Fivoaran\'ny isan\'ny fifanakalozana isam-bolana',
+        'q1_chart_title': 'Q1: Fivoaran\'ny isan\'ny fifanakalozana isam-bolana',
+        'q1_xaxis_label': 'Volana',
+        'q1_yaxis_label': 'Isan\'ny fifanakalozana',
         # Q2 相关
         'q2_analysis_purpose': '📊 Tanjona ny fikarohana',
         'q2_analysis_description': 'Ity fikarohana ity dia mikendry ny hahatakatra ny fizarana ny trano amin\'ny **sokajy vidiny** samihafa mba hamantarana ny sokajy vidiny lehibe amin\'ny tsena.',
@@ -2180,6 +2388,9 @@ LANGUAGES = {
         'q2_avg_per_range': 'Moyenne isaky ny sokajy',
         'q2_distribution_chart': '📊 Sary fizarana',
         'q2_title': 'Q2: Fizarana ny sokajy vidiny',
+        'q2_chart_title': 'Q2: Fizarana ny sokajy vidiny',
+        'q2_xaxis_label': 'Sokajy vidiny',
+        'q2_yaxis_label': 'Isan\'ny fifanakalozana',
         # Q3 相关
         'q3_analysis_purpose': '📊 Tanjona ny fikarohana',
         'q3_analysis_description': 'Ity fikarohana ity dia mikendry ny hampitaha ny vidiny antonony amin\'ny **karazana fifanakalozana** samihafa (toy ny fivarotana, fifanakalozana, sns.) mba hahatakatra ny fiantraikan\'ny karazana fifanakalozana amin\'ny vidiny.',
@@ -2201,6 +2412,9 @@ LANGUAGES = {
         'q3_price_difference': 'Fahasamihafan\'ny vidiny',
         'q3_comparison_chart': '📊 Sary fampitahana',
         'q3_title': 'Q3: Vidiny antonony amin\'ny karazana fifanakalozana',
+        'q3_chart_title': 'Q3: Vidiny antonony amin\'ny karazana fifanakalozana',
+        'q3_xaxis_label': 'Vidiny antonony (€)',
+        'q3_yaxis_label': 'Karazana fifanakalozana',
         # Q4 相关
         'q4_analysis_purpose': '📊 Tanjona ny fikarohana',
         'q4_analysis_description': 'Ity fikarohana ity dia mikendry ny hahatakatra ny fizarana ara-pahamaroan\'ny **karazana trano** samihafa (toy ny efitrano, trano, sns.) amin\'ny tsena.',
@@ -2472,6 +2686,9 @@ LANGUAGES = {
         'q15_apartment_median': 'Vidiny median amin\'ny efitrano',
         'q15_distribution_chart': '📊 Sary fizarana',
         'q15_title': 'Q15: Fizarana ny vidiny - Trano vs Efitrano',
+        'q15_chart_title': 'Q15: Fizarana ny vidiny - Trano vs Efitrano',
+        'q15_xaxis_label': 'Vidiny (€)',
+        'q15_yaxis_label': 'Hakitroka',
         # Q16 相关
         'q16_analysis_purpose': '📊 Tanjona ny fikarohana',
         'q16_analysis_description': 'Ity fikarohana ity dia mikendry ny hikajy ny **tahan\'ny velarany tany amin\'ny velarany namboarina** mba hahatakatra ny fampiasana tany amin\'ny tanàna samihafa.',
@@ -2493,6 +2710,9 @@ LANGUAGES = {
         'q16_avg_ratio': 'Tahan antonony',
         'q16_ranking_chart': '📊 Sary filaharana',
         'q16_title': 'Q16: Tahan\'ny tany/velarany namboarina 10 voalohany',
+        'q16_chart_title': 'Q16: Tahan\'ny tany/velarany namboarina 10 voalohany',
+        'q16_xaxis_label': 'Tahan',
+        'q16_yaxis_label': 'Tanàna',
         # Q17 相关
         'q17_analysis_purpose': '📊 Tanjona ny fikarohana',
         'q17_analysis_description': 'Ity fikarohana ity dia mikendry ny hikaroka ny **isan\'ny trano isaky ny fifanakalozana** mba hahatakatra ny fahasarotan\'ny fifanakalozana.',
@@ -2514,6 +2734,9 @@ LANGUAGES = {
         'q17_avg_properties': 'Isan\'ny trano antonony',
         'q17_distribution_chart': '📊 Sary fizarana',
         'q17_title': 'Q17: Isan\'ny trano isaky ny fifanakalozana',
+        'q17_chart_title': 'Q17: Isan\'ny trano isaky ny fifanakalozana',
+        'q17_xaxis_label': 'Isan\'ny trano',
+        'q17_yaxis_label': 'Isan\'ny fifanakalozana',
         # Q18 相关
         'q18_analysis_purpose': '📊 Tanjona ny fikarohana',
         'q18_analysis_description': 'Ity fikarohana ity dia mikendry ny hisoratra ny **isan\'ny trano misy tany sy tsy misy tany** mba hahatakatra ny toetra amin\'ny karazana trano samihafa.',
@@ -2535,6 +2758,9 @@ LANGUAGES = {
         'q18_land_ownership_rate': 'Tahan fananana tany',
         'q18_comparison_chart': '📊 Sary fampitahana',
         'q18_title': 'Q18: Statistika trano misy/tsy misy tany',
+        'q18_chart_title': 'Q18: Statistika trano misy/tsy misy tany',
+        'q18_xaxis_label': 'Karazana trano',
+        'q18_yaxis_label': 'Isan-jato',
         # Q19 相关
         'q19_analysis_purpose': '📊 Tanjona ny fikarohana',
         'q19_analysis_description': 'Ity fikarohana ity dia mikendry ny hikaroka ny **fizarana ny fifanakalozana amin\'ny andro amin\'ny herinandro** mba hahatakatra ny lamina fotoana amin\'ny fifanakalozana.',
@@ -2556,6 +2782,9 @@ LANGUAGES = {
         'q19_weekday_avg': 'Antonony amin\'ny andro fiasana',
         'q19_distribution_chart': '📊 Sary fizarana',
         'q19_title': 'Q19: Fizarana ny fifanakalozana isam-pivoriana',
+        'q19_chart_title': 'Q19: Fizarana ny fifanakalozana isam-pivoriana',
+        'q19_xaxis_label': 'Andro amin\'ny herinandro',
+        'q19_yaxis_label': 'Isan\'ny fifanakalozana',
         # Q20 相关
         'q20_analysis_purpose': '📊 Tanjona ny fikarohana',
         'q20_analysis_description': 'Ity fikarohana ity dia mikendry ny hikaroka ny **habetsaky ny fifanakalozana isam-pivoriana sy ny totalin\'ny sandan\'ny fifanakalozana** mba hahatakatra ny fironana amin\'ny tsena isam-pivoriana.',
@@ -2578,6 +2807,10 @@ LANGUAGES = {
         'q20_avg_volume_per_week': 'Sandany antonony isaky ny herinandro',
         'q20_trend_chart': '📊 Sary fironana isam-pivoriana',
         'q20_title': 'Q20: Fikarohana ny habetsaky ny fifanakalozana isam-pivoriana',
+        'q20_chart_title': 'Q20: Tendances ny habetsaky ny fifanakalozana isam-pivoriana sy ny sandan\'ny total',
+        'q20_xaxis_label': 'Herinandro',
+        'q20_yaxis_label_1': 'Isan\'ny fifanakalozana',
+        'q20_yaxis_label_2': 'Sandan\'ny total (€)',
     }
 }
 
@@ -2914,13 +3147,12 @@ def question1(mydb):
         st.markdown("---")
         st.subheader(get_text('q1_trend_chart'))
         
-        # 创建图表
-        if lang == 'zh':
-            title = 'Q1: 每月交易数量变化趋势'
-            labels_dict = {'mois': '月份', 'nombre_mutations': '交易数量'}
-        else:
-            title = 'Q1: Évolution du nombre de mutations par mois'
-            labels_dict = {'mois': 'Mois', 'nombre_mutations': 'Nombre de mutations'}
+        # 创建图表（使用多语言支持）
+        title = get_text('q1_chart_title')
+        labels_dict = {
+            'mois': get_text('q1_xaxis_label'),
+            'nombre_mutations': get_text('q1_yaxis_label')
+        }
         
         fig = px.line(df, x='mois', y='nombre_mutations', 
                      title=title,
@@ -3004,13 +3236,12 @@ def question2(mydb):
         st.markdown("---")
         st.subheader(get_text('q2_distribution_chart'))
         
-        # 创建图表
-        if lang == 'zh':
-            title = 'Q2: 价格区间分布'
-            labels_dict = {'tranche': '价格区间', 'nombre': '交易数量'}
-        else:
-            title = 'Q2: Distribution des valeurs foncières par tranche'
-            labels_dict = {'tranche': 'Tranche de prix', 'nombre': 'Nombre de mutations'}
+        # 创建图表（使用多语言支持）
+        title = get_text('q2_chart_title')
+        labels_dict = {
+            'tranche': get_text('q2_xaxis_label'),
+            'nombre': get_text('q2_yaxis_label')
+        }
         
         fig = px.bar(df, x='tranche', y='nombre', 
                     title=title,
@@ -3085,13 +3316,12 @@ def question3(mydb):
         st.markdown("---")
         st.subheader(get_text('q3_comparison_chart'))
         
-        # 创建图表
-        if lang == 'zh':
-            title = 'Q3: 不同交易类型的平均价格对比'
-            labels_dict = {'valeur_moyenne': '平均价格 (€)', 'nature_mutation': '交易类型'}
-        else:
-            title = 'Q3: Valeur foncière moyenne par nature de mutation'
-            labels_dict = {'valeur_moyenne': 'Valeur moyenne (€)', 'nature_mutation': 'Nature de mutation'}
+        # 创建图表（使用多语言支持）
+        title = get_text('q3_chart_title')
+        labels_dict = {
+            'valeur_moyenne': get_text('q3_xaxis_label'),
+            'nature_mutation': get_text('q3_yaxis_label')
+        }
         
         fig = px.bar(df, x='valeur_moyenne', y='nature_mutation', orientation='h',
                     title=title,
@@ -4328,19 +4558,18 @@ def question15(mydb):
         st.subheader(get_text('q15_distribution_chart'))
         
         # 创建图表
-        if lang == 'zh':
-            title = 'Q15: 房屋与公寓的价格分布对比'
-            labels_dict = {'type_local': '房产类型', 'valeur_fonciere': '房产价值 (€)'}
-        else:
-            title = 'Q15: Distribution des prix - Maisons vs Appartements'
-            labels_dict = {'type_local': 'Type de bien', 'valeur_fonciere': 'Valeur foncière (€)'}
+        title = get_text('q15_chart_title')
+        labels_dict = {
+            'type_local': get_text('q18_xaxis_label'),  # Property Type
+            'valeur_fonciere': get_text('q15_xaxis_label')  # Price (€) - using xaxis_label for y-axis since it's "Price (€)"
+        }
         
         fig = px.box(df, x='type_local', y='valeur_fonciere', 
                     title=title,
                     labels=labels_dict)
         fig.update_layout(
             xaxis_title=labels_dict['type_local'],
-            yaxis_title=labels_dict['valeur_fonciere']
+            yaxis_title=labels_dict['valeur_fonciere']  # This will show "Price (€)" which is correct for y-axis
         )
         st.plotly_chart(fig, use_container_width=True)
         
@@ -4412,12 +4641,11 @@ def question16(mydb):
         st.subheader(get_text('q16_ranking_chart'))
         
         # 创建图表
-        if lang == 'zh':
-            title = 'Q16: 土地/建筑面积比前10名城市'
-            labels_dict = {'ratio_moyen': '平均比值', 'commune': '城市'}
-        else:
-            title = 'Q16: Top 10 ratio surface terrain/surface bâtie par commune'
-            labels_dict = {'ratio_moyen': 'Ratio moyen', 'commune': 'Commune'}
+        title = get_text('q16_chart_title')
+        labels_dict = {
+            'ratio_moyen': get_text('q16_xaxis_label'),
+            'commune': get_text('q16_yaxis_label')
+        }
         
         fig = px.bar(df, x='ratio_moyen', y='commune', orientation='h',
                     title=title,
@@ -4500,12 +4728,11 @@ def question17(mydb):
         st.subheader(get_text('q17_distribution_chart'))
         
         # 创建图表
-        if lang == 'zh':
-            title = 'Q17: 每笔交易的房产数量分布'
-            labels_dict = {'nb_biens': '房产数量', 'nb_mutations': '交易数量'}
-        else:
-            title = 'Q17: Nombre de biens par transaction'
-            labels_dict = {'nb_biens': 'Nombre de biens', 'nb_mutations': 'Nombre de mutations'}
+        title = get_text('q17_chart_title')
+        labels_dict = {
+            'nb_biens': get_text('q17_xaxis_label'),
+            'nb_mutations': get_text('q17_yaxis_label')
+        }
         
         fig = px.bar(df, x='nb_biens', y='nb_mutations', 
                     title=title,
@@ -4582,16 +4809,21 @@ def question18(mydb):
         st.subheader(get_text('q18_comparison_chart'))
         
         # 创建图表
+        title = get_text('q18_chart_title')
+        xaxis_title = get_text('q18_xaxis_label')
+        yaxis_title = get_text('q18_yaxis_label')
+        
+        # 获取柱状图标签（使用现有的翻译键或创建新的）
         if lang == 'zh':
-            title = 'Q18: 不同房产类型的土地拥有情况'
-            xaxis_title = '房产类型'
-            yaxis_title = '房产数量'
             bar_names = {'avec_terrain': '有土地', 'sans_terrain': '无土地'}
-        else:
-            title = 'Q18: Biens avec/sans terrain par type'
-            xaxis_title = 'Type de local'
-            yaxis_title = 'Nombre de biens'
+        elif lang == 'fr':
             bar_names = {'avec_terrain': 'Avec terrain', 'sans_terrain': 'Sans terrain'}
+        elif lang == 'en':
+            bar_names = {'avec_terrain': 'With Land', 'sans_terrain': 'Without Land'}
+        elif lang == 'ar':
+            bar_names = {'avec_terrain': 'مع أرض', 'sans_terrain': 'بدون أرض'}
+        else:  # mg
+            bar_names = {'avec_terrain': 'Misy tany', 'sans_terrain': 'Tsy misy tany'}
         
         fig = go.Figure()
         fig.add_trace(go.Bar(name=bar_names['avec_terrain'], x=df['type_local'], y=df['avec_terrain']))
@@ -4671,12 +4903,11 @@ def question19(mydb):
         st.subheader(get_text('q19_distribution_chart'))
         
         # 创建图表
-        if lang == 'zh':
-            title = 'Q19: 一周中不同日期的交易分布'
-            labels_dict = {'jour_semaine': '星期', 'nombre_transactions': '交易数量'}
-        else:
-            title = 'Q19: Transactions par jour de la semaine'
-            labels_dict = {'jour_semaine': 'Jour de la semaine', 'nombre_transactions': 'Nombre de transactions'}
+        title = get_text('q19_chart_title')
+        labels_dict = {
+            'jour_semaine': get_text('q19_xaxis_label'),
+            'nombre_transactions': get_text('q19_yaxis_label')
+        }
         
         fig = px.bar(df, x='jour_semaine', y='nombre_transactions', 
                     title=title,
@@ -4756,18 +4987,22 @@ def question20(mydb):
         st.subheader(get_text('q20_trend_chart'))
         
         # 创建图表
+        title = get_text('q20_chart_title')
+        xaxis_title = get_text('q20_xaxis_label')
+        yaxis_title_1 = get_text('q20_yaxis_label_1')
+        yaxis_title_2 = get_text('q20_yaxis_label_2')
+        
+        # 获取trace名称（使用现有的翻译键或创建新的）
         if lang == 'zh':
-            title = 'Q20: 每周交易量和交易总额趋势'
-            xaxis_title = '周'
-            yaxis_title_1 = '交易数量'
-            yaxis_title_2 = '交易总额 (€)'
             trace_names = {'transactions': '交易数量', 'volume': '交易总额'}
-        else:
-            title = 'Q20: Évolution du volume de ventes par semaine'
-            xaxis_title = 'Semaine'
-            yaxis_title_1 = 'Nombre de transactions'
-            yaxis_title_2 = 'Volume total (€)'
+        elif lang == 'fr':
             trace_names = {'transactions': 'Nb transactions', 'volume': 'Volume total'}
+        elif lang == 'en':
+            trace_names = {'transactions': 'Number of Transactions', 'volume': 'Total Value'}
+        elif lang == 'ar':
+            trace_names = {'transactions': 'عدد المعاملات', 'volume': 'إجمالي القيمة'}
+        else:  # mg
+            trace_names = {'transactions': 'Isan\'ny fifanakalozana', 'volume': 'Sandan\'ny total'}
         
         fig = make_subplots(specs=[[{"secondary_y": True}]])
         fig.add_trace(
@@ -4804,13 +5039,25 @@ def main():
         st.markdown("""
         <style>
         /* RTL支持 - 阿拉伯语 */
+        /* 整个应用RTL */
         .stApp {
             direction: rtl !important;
         }
         .stApp > header {
             direction: rtl !important;
         }
+        /* 主内容区RTL */
         .main .block-container {
+            direction: rtl !important;
+            text-align: right !important;
+        }
+        /* 侧边栏RTL - 通过flexbox翻转布局，使侧边栏在左侧 */
+        [data-testid="stAppViewContainer"] {
+            flex-direction: row-reverse !important;
+            display: flex !important;
+        }
+        /* 侧边栏RTL */
+        [data-testid="stSidebar"] {
             direction: rtl !important;
             text-align: right !important;
         }
@@ -4821,6 +5068,10 @@ def main():
         .stSidebar .stMarkdown {
             direction: rtl !important;
             text-align: right !important;
+        }
+        /* 主内容区RTL */
+        [data-testid="stAppViewContainer"] > .main {
+            direction: rtl !important;
         }
         /* 确保文本元素RTL */
         .main p, .main div, .main span, .main h1, .main h2, .main h3, .main h4, .main h5, .main h6, 
@@ -4856,6 +5107,9 @@ def main():
             direction: rtl !important;
             text-align: right !important;
         }
+        .stRadio > div {
+            direction: rtl !important;
+        }
         /* Expander RTL */
         .streamlit-expanderHeader {
             direction: rtl !important;
@@ -4870,6 +5124,33 @@ def main():
             direction: rtl !important;
             text-align: right !important;
         }
+        /* 按钮RTL */
+        .stButton > button {
+            direction: rtl !important;
+            text-align: right !important;
+        }
+        /* 确保所有Streamlit组件的标签右对齐 */
+        label {
+            direction: rtl !important;
+            text-align: right !important;
+        }
+        /* 输入框容器RTL */
+        .stTextInput > div {
+            direction: rtl !important;
+        }
+        /* 选择框容器RTL */
+        .stSelectbox > div {
+            direction: rtl !important;
+        }
+        /* Radio按钮容器RTL */
+        .stRadio > div {
+            direction: rtl !important;
+        }
+        /* 确保帮助文本右对齐 */
+        [data-baseweb="tooltip"] {
+            direction: rtl !important;
+            text-align: right !important;
+        }
         /* 列表RTL */
         ul, ol {
             direction: rtl !important;
@@ -4878,6 +5159,11 @@ def main():
             padding-left: 0 !important;
         }
         li {
+            direction: rtl !important;
+            text-align: right !important;
+        }
+        /* 标题RTL */
+        h1, h2, h3, h4, h5, h6 {
             direction: rtl !important;
             text-align: right !important;
         }
@@ -4896,6 +5182,11 @@ def main():
         pre, code {
             direction: ltr !important;
             text-align: left !important;
+        }
+        /* 侧边栏按钮位置调整 */
+        [data-testid="stSidebar"] [data-testid="baseButton-header"] {
+            left: 0 !important;
+            right: auto !important;
         }
         </style>
         """, unsafe_allow_html=True)
